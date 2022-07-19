@@ -15,3 +15,7 @@ cd ../../code.datacontroller.io
 # bring the code over
 cp -R ../datacontroller/sas/sasjsbuild/sasdocs/* docs/
 
+# create CNAME entry
+echo 'code.datacontroller.io' > docs/CNAME
+
+gacp
