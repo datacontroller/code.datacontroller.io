@@ -138,17 +138,20 @@ $(document).ready(function(){initNavTree('viya_2macros__viya_2dc__getgroupmember
 <div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="comment"></span> </div>
 <div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="comment">  @version 3.4</span></div>
 <div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="comment">  @author 4GL Apps Ltd</span></div>
-<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="comment">  @copyright 4GL Apps Ltd - this is a licensed product and</span></div>
-<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="comment">    NOT FOR RESALE OR DISTRIBUTION.</span></div>
-<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="comment">**/</span></div>
-<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span> </div>
-<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>%macro dc_getgroupmembers(group,outds=dc_getgroupmembers);</div>
-<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>  %mv_getgroupmembers(%str(&amp;group),outds=&amp;outds)</div>
-<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>  data &amp;outds ;</div>
-<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>    length membername $64;</div>
-<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>    <span class="keyword">set</span> &amp;outds(rename=(name=MemberName));</div>
-<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>  run;</div>
-<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>%mend;</div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="comment">  @copyright 4GL Apps Ltd.  This code may only be used within Data Controller</span></div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="comment">    and may not be re-distributed or re-sold without the express permission of</span></div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="comment">    4GL Apps Ltd.</span></div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="comment">    Data Controller is free for up to 5 users and may be downloaded from</span></div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="comment">    here:  https://4gl.uk/dcdeploy</span></div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="comment">**/</span></div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span> </div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>%macro dc_getgroupmembers(group,outds=dc_getgroupmembers);</div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>  %mv_getgroupmembers(%str(&amp;group),outds=&amp;outds)</div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>  data &amp;outds ;</div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>    length membername $64;</div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>    <span class="keyword">set</span> &amp;outds(rename=(name=MemberName));</div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>  run;</div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>%mend dc_getgroupmembers;</div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- HTML footer for doxygen 1.8.17-->

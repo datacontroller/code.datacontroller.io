@@ -137,51 +137,54 @@ $(document).ready(function(){initNavTree('sas9_2services__meta_2usernav_2usermem
 <div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="comment"></span> </div>
 <div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="comment">  @version 9.3</span></div>
 <div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="comment">  @author 4GL Apps Ltd</span></div>
-<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="comment">  @copyright 4GL Apps Ltd - this is a licensed product and</span></div>
-<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="comment">    NOT FOR RESALE OR DISTRIBUTION.</span></div>
-<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="comment">**/</span></div>
-<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span>%mpeinit()</div>
-<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span>data sasMembers ;</div>
-<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>  attrib uriGrp uriMem GroupId GroupName Group_or_Role MemberName MemberType</div>
-<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>    MemberUpdated membercreated emailuri length=$64</div>
-<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>    GroupDesc   email        length=$256</div>
-<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>    rcGrp rcMem rc i j  length=3;</div>
-<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>  call missing (of _all_);</div>
-<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>  drop uriGrp  rcGrp rcMem rc i j;</div>
-<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>  set iwant;</div>
-<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>  i=1;</div>
-<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>  * Grab the URI for the first Group ;</div>
-<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>  rcGrp=metadata_getnobj(groupid,i,uriGrp);</div>
-<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span> </div>
-<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>  * If Group found, enter do loop ;</div>
-<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>  if rcGrp&gt;0 then do;</div>
-<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>    call missing (rcMem,uriMem,GroupId,GroupName,Group_or_Role</div>
-<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>      ,MemberName,MemberType);</div>
-<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>    * get group info ;</div>
-<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>    rc = metadata_getattr(uriGrp,&quot;Id&quot;,GroupId);</div>
-<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>    rc = metadata_getattr(uriGrp,&quot;Name&quot;,GroupName);</div>
-<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>    rc = metadata_getattr(uriGrp,&quot;PublicType&quot;,Group_or_Role);</div>
-<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>    rc = metadata_getattr(uriGrp,&quot;Desc&quot;,GroupDesc);</div>
-<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>    j=1;</div>
-<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>    do while (metadata_getnasn(uriGrp,&quot;MemberIdentities&quot;,j,uriMem) &gt; 0);</div>
-<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>      call missing (MemberName,MemberType);</div>
-<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>      rc = metadata_getattr(uriMem,&quot;Name&quot;,MemberName);</div>
-<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>      rc = metadata_getattr(uriMem,&quot;PublicType&quot;,MemberType);</div>
-<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>      rc=metadata_getattr(uriMem, &quot;MetadataCreated&quot;, MemberCreated);</div>
-<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>      rc=metadata_getattr(uriMem, &quot;MetadataUpdated&quot;, MemberUpdated);</div>
-<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>      emailrc=metadata_getnasn(uriMem,&quot;EmailAddresses&quot;,1,emailuri);</div>
-<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>      if (emailrc&gt;0) then rc=metadata_getattr(emailuri,&quot;Address&quot;,email);</div>
-<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>      output;</div>
-<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>      j+1;</div>
-<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>    call missing(email,emailuri);</div>
-<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>    end;</div>
-<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>  end;</div>
-<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>  if _n_=1 then delete;</div>
-<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>run;</div>
-<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span> </div>
-<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>%webout(OPEN)</div>
-<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>%webout(OBJ,sasMembers)</div>
-<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>%webout(CLOSE)</div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="comment">  @copyright 4GL Apps Ltd.  This code may only be used within Data Controller</span></div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="comment">    and may not be re-distributed or re-sold without the express permission of</span></div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="comment">    4GL Apps Ltd.</span></div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="comment">    Data Controller is free for up to 5 users and may be downloaded from</span></div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="comment">    here:  https://4gl.uk/dcdeploy</span></div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="comment">**/</span></div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>%mpeinit()</div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>data sasMembers ;</div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>  attrib uriGrp uriMem GroupId GroupName Group_or_Role MemberName MemberType</div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>    MemberUpdated membercreated emailuri length=$64</div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>    GroupDesc   email        length=$256</div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>    rcGrp rcMem rc i j  length=3;</div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>  call missing (of _all_);</div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>  drop uriGrp  rcGrp rcMem rc i j;</div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>  set iwant;</div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>  i=1;</div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>  * Grab the URI for the first Group ;</div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>  rcGrp=metadata_getnobj(groupid,i,uriGrp);</div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span> </div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>  * If Group found, enter do loop ;</div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>  if rcGrp&gt;0 then do;</div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>    call missing (rcMem,uriMem,GroupId,GroupName,Group_or_Role</div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>      ,MemberName,MemberType);</div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>    * get group info ;</div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>    rc = metadata_getattr(uriGrp,&quot;Id&quot;,GroupId);</div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>    rc = metadata_getattr(uriGrp,&quot;Name&quot;,GroupName);</div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>    rc = metadata_getattr(uriGrp,&quot;PublicType&quot;,Group_or_Role);</div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>    rc = metadata_getattr(uriGrp,&quot;Desc&quot;,GroupDesc);</div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>    j=1;</div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>    do while (metadata_getnasn(uriGrp,&quot;MemberIdentities&quot;,j,uriMem) &gt; 0);</div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>      call missing (MemberName,MemberType);</div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>      rc = metadata_getattr(uriMem,&quot;Name&quot;,MemberName);</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>      rc = metadata_getattr(uriMem,&quot;PublicType&quot;,MemberType);</div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>      rc=metadata_getattr(uriMem, &quot;MetadataCreated&quot;, MemberCreated);</div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>      rc=metadata_getattr(uriMem, &quot;MetadataUpdated&quot;, MemberUpdated);</div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>      emailrc=metadata_getnasn(uriMem,&quot;EmailAddresses&quot;,1,emailuri);</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>      if (emailrc&gt;0) then rc=metadata_getattr(emailuri,&quot;Address&quot;,email);</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>      output;</div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>      j+1;</div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>    call missing(email,emailuri);</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>    end;</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>  end;</div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>  if _n_=1 then delete;</div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>run;</div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span> </div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>%webout(OPEN)</div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>%webout(OBJ,sasMembers)</div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>%webout(CLOSE)</div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- HTML footer for doxygen 1.8.17-->

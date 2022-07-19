@@ -139,43 +139,46 @@ $(document).ready(function(){initNavTree('getsubmits_8sas_source.html',''); init
 <div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="comment"></span> </div>
 <div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="comment">  @version 9.2</span></div>
 <div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="comment">  @author 4GL Apps Ltd</span></div>
-<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="comment">  @copyright 4GL Apps Ltd - this is a licensed product and</span></div>
-<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="comment">    NOT FOR RESALE OR DISTRIBUTION.</span></div>
-<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="comment"></span> </div>
-<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="comment">**/</span></div>
-<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span> </div>
-<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>%mpeinit()</div>
-<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span> </div>
-<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>PROC FORMAT;</div>
-<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>  picture yymmddhhmmss other=&#39;%0Y-%0m-%0d %0H:%0M:%0S&#39; (datatype=datetime);</div>
-<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>RUN;</div>
-<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span> </div>
-<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>proc sql noprint;</div>
-<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>create table work.fromsas (rename=(SUBMITTED_ON=SUBMITTED_ON_DTTM)) as</div>
-<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>  select table_id</div>
-<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>    ,cats(base_lib,&#39;.&#39;,base_ds) as base_table</div>
-<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>    ,input_vars</div>
-<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>    ,input_obs</div>
-<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>    ,submitted_by_nm</div>
-<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>    ,submitted_reason_txt</div>
-<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>    ,&#39;DEPRECATED&#39; as approve_group</div>
-<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>    ,submit_status_cd as review_status_id</div>
-<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>    ,reviewed_by_nm</div>
-<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>    ,reviewed_on_dttm</div>
-<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>    ,cats(put(SUBMITTED_ON_DTTM,yymmddhhmmss.)) as SUBMITTED_ON</div>
-<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>  from &amp;mpelib..mpe_submit</div>
-<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>  where submitted_by_nm=&quot;%mf_getuser()&quot; and submit_status_cd=&#39;SUBMITTED&#39;</div>
-<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>  order by submitted_on_dttm desc;</div>
-<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span> </div>
-<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>%mp_abort(iftrue= (&amp;syscc ne 0)</div>
-<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>  ,mac=&amp;_program..sas</div>
-<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>  ,msg=%str(syscc=&amp;syscc)</div>
-<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>)</div>
-<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span> </div>
-<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>%webout(OPEN)</div>
-<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>%webout(OBJ,fromSAS)</div>
-<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>%webout(CLOSE)</div>
-<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span> </div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="comment">  @copyright 4GL Apps Ltd.  This code may only be used within Data Controller</span></div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="comment">    and may not be re-distributed or re-sold without the express permission of</span></div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="comment">    4GL Apps Ltd.</span></div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="comment">    Data Controller is free for up to 5 users and may be downloaded from</span></div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="comment">    here:  https://4gl.uk/dcdeploy</span></div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="comment"></span> </div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span><span class="comment">**/</span></div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span> </div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>%mpeinit()</div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span> </div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>PROC FORMAT;</div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>  picture yymmddhhmmss other=&#39;%0Y-%0m-%0d %0H:%0M:%0S&#39; (datatype=datetime);</div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>RUN;</div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span> </div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>proc sql noprint;</div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>create table work.fromsas (rename=(SUBMITTED_ON=SUBMITTED_ON_DTTM)) as</div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>  select table_id</div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>    ,cats(base_lib,&#39;.&#39;,base_ds) as base_table</div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>    ,input_vars</div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>    ,input_obs</div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>    ,submitted_by_nm</div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>    ,submitted_reason_txt</div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>    ,&#39;DEPRECATED&#39; as approve_group</div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>    ,submit_status_cd as review_status_id</div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>    ,reviewed_by_nm</div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>    ,reviewed_on_dttm</div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>    ,cats(put(SUBMITTED_ON_DTTM,yymmddhhmmss.)) as SUBMITTED_ON</div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>  from &amp;mpelib..mpe_submit</div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>  where submitted_by_nm=&quot;%mf_getuser()&quot; and submit_status_cd=&#39;SUBMITTED&#39;</div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>  order by submitted_on_dttm desc;</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span> </div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>%mp_abort(iftrue= (&amp;syscc ne 0)</div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>  ,mac=&amp;_program..sas</div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>  ,msg=%str(syscc=&amp;syscc)</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>)</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span> </div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>%webout(OPEN)</div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>%webout(OBJ,fromSAS)</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>%webout(CLOSE)</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span> </div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- HTML footer for doxygen 1.8.17-->

@@ -143,44 +143,47 @@ $(document).ready(function(){initNavTree('getddl_8sas_source.html',''); initResi
 <div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="comment"></span> </div>
 <div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="comment">  @version 9.2</span></div>
 <div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="comment">  @author 4GL Apps Ltd</span></div>
-<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="comment">  @copyright 4GL Apps Ltd - this is a licensed product and</span></div>
-<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="comment">    NOT FOR RESALE OR DISTRIBUTION.</span></div>
-<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span><span class="comment">**/</span></div>
-<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>%global libref ds flavour;</div>
-<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span> </div>
-<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>%let flavour=%sysfunc(coalescec(&amp;flavour,SAS));</div>
-<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span> </div>
-<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>%mpeinit()</div>
-<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span> </div>
-<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>%dc_assignlib(READ,&amp;libref)</div>
-<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span> </div>
-<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>data _null_;</div>
-<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>  <span class="comment">/* check if the request is for a format catalog */</span></div>
-<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>  ds=symget(<span class="stringliteral">&#39;ds&#39;</span>);</div>
-<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>  <span class="keywordflow">if</span> subpad(cats(reverse(ds)),1,3)=:<span class="stringliteral">&#39;CF-&#39;</span> then <span class="keywordflow">do</span>;</div>
-<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>    ds=scan(ds,1,<span class="charliteral">&#39;-&#39;</span>);</div>
-<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>    libds=cats(symget(<span class="stringliteral">&#39;libref&#39;</span>),<span class="charliteral">&#39;.&#39;</span>,ds);</div>
-<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>    putlog <span class="stringliteral">&quot;Format Catalog Captured&quot;</span>;</div>
-<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>    call execute(<span class="stringliteral">&#39;%mddl_sas_cntlout(libds=work.fmtextract)&#39;</span>);</div>
-<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>    call symputx(<span class="stringliteral">&#39;libref&#39;</span>,<span class="stringliteral">&#39;work&#39;</span>);</div>
-<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>    call symputx(<span class="stringliteral">&#39;ds&#39;</span>,<span class="stringliteral">&#39;fmtextract&#39;</span>);</div>
-<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>  end;</div>
-<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>  putlog (_all_)(=);</div>
-<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>run;</div>
-<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span> </div>
-<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>%mp_abort(iftrue=(<span class="stringliteral">&quot;exist&amp;ds&quot;</span> ne <span class="stringliteral">&quot;exist&quot;</span> and %mf_existds(libds=&amp;libref..&amp;ds)&lt;1)</div>
-<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>  ,mac=&amp;_program</div>
-<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>  ,msg=%str(Dataset &amp;libref..&amp;ds was not found)</div>
-<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>)</div>
-<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span> </div>
-<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>%let tmploc=%sysfunc(pathname(work))/temp.txt;</div>
-<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>filename tmp <span class="stringliteral">&quot;&amp;tmploc&quot;</span>;</div>
-<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>%mp_getddl(&amp;libref,&amp;ds,flavour=&amp;flavour, fref=tmp, applydttm=YES)</div>
-<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span> </div>
-<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>%mp_streamfile(contenttype=TEXT</div>
-<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>  ,inloc=%str(&amp;tmploc)</div>
-<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>  ,outname=&amp;libref._&amp;ds..ddl</div>
-<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>)</div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="comment">  @copyright 4GL Apps Ltd.  This code may only be used within Data Controller</span></div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="comment">    and may not be re-distributed or re-sold without the express permission of</span></div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span><span class="comment">    4GL Apps Ltd.</span></div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span><span class="comment">    Data Controller is free for up to 5 users and may be downloaded from</span></div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span><span class="comment">    here:  https://4gl.uk/dcdeploy</span></div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span><span class="comment">**/</span></div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>%global libref ds flavour;</div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span> </div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>%let flavour=%sysfunc(coalescec(&amp;flavour,SAS));</div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span> </div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>%mpeinit()</div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span> </div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>%dc_assignlib(READ,&amp;libref)</div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span> </div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>data _null_;</div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>  <span class="comment">/* check if the request is for a format catalog */</span></div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>  ds=symget(<span class="stringliteral">&#39;ds&#39;</span>);</div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>  <span class="keywordflow">if</span> subpad(cats(reverse(ds)),1,3)=:<span class="stringliteral">&#39;CF-&#39;</span> then <span class="keywordflow">do</span>;</div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>    ds=scan(ds,1,<span class="charliteral">&#39;-&#39;</span>);</div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>    libds=cats(symget(<span class="stringliteral">&#39;libref&#39;</span>),<span class="charliteral">&#39;.&#39;</span>,ds);</div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>    putlog <span class="stringliteral">&quot;Format Catalog Captured&quot;</span>;</div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>    call execute(<span class="stringliteral">&#39;%mddl_sas_cntlout(libds=work.fmtextract)&#39;</span>);</div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>    call symputx(<span class="stringliteral">&#39;libref&#39;</span>,<span class="stringliteral">&#39;work&#39;</span>);</div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>    call symputx(<span class="stringliteral">&#39;ds&#39;</span>,<span class="stringliteral">&#39;fmtextract&#39;</span>);</div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>  end;</div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>  putlog (_all_)(=);</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>run;</div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span> </div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>%mp_abort(iftrue=(<span class="stringliteral">&quot;exist&amp;ds&quot;</span> ne <span class="stringliteral">&quot;exist&quot;</span> and %mf_existds(libds=&amp;libref..&amp;ds)&lt;1)</div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>  ,mac=&amp;_program</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>  ,msg=%str(Dataset &amp;libref..&amp;ds was not found)</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>)</div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span> </div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>%let tmploc=%sysfunc(pathname(work))/temp.txt;</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>filename tmp <span class="stringliteral">&quot;&amp;tmploc&quot;</span>;</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>%mp_getddl(&amp;libref,&amp;ds,flavour=&amp;flavour, fref=tmp, applydttm=YES)</div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span> </div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>%mp_streamfile(contenttype=TEXT</div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>  ,inloc=%str(&amp;tmploc)</div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>  ,outname=&amp;libref._&amp;ds..ddl</div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>)</div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- HTML footer for doxygen 1.8.17-->
