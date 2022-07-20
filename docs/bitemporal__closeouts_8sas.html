@@ -134,8 +134,8 @@ $(document).ready(function(){initNavTree('bitemporal__closeouts_8sas.html',''); 
 <p><a href="bitemporal__closeouts_8sas_source.html">Go to the source code of this file.</a></p>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p >Closes out records from a temporal table by reference to a single temporal range + business key. Only live records are closed out, so the entire key should be provided in the input table EXCEPT the TECH_FROM. All records matching the key (as per the input table) are closed out on TECH_TO.</p>
-<p >Returns an updated base table and &amp;mpelib..mpe_dataloads table</p>
-<p >potential improvements - write the update statements as a text file and retain for future reference!</p>
+<p >Returns an updated base table and <code>&amp;mpelib..mpe_dataloads</code> table</p>
+<p >Potential improvements - write the update statements as a text file and retain for future reference!</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">now=</td><td>(DEFINE) Allows consistent tracking of tech dates. Should be a date literal, not a numeric constant, for DB compatibility. </td></tr>

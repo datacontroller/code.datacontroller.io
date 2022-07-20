@@ -1,7 +1,5 @@
 var NAVTREEINDEX3 =
 {
-"server_2macros__server_2dc__getgroups_8sas.html":[1,1,3,1,0,3],
-"server_2macros__server_2dc__getgroups_8sas_source.html":[1,1,3,1,0,3],
 "server_2macros__server_2dc__getlibs_8sas.html":[1,1,3,1,0,4],
 "server_2macros__server_2dc__getlibs_8sas_source.html":[1,1,3,1,0,4],
 "server_2macros__server_2dc__getservicecode_8sas.html":[1,1,3,1,0,5],

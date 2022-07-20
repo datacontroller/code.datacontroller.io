@@ -135,9 +135,14 @@ $(document).ready(function(){initNavTree('mpe__columnlevelsecurity_8sas.html',''
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p >Implements CLS as per the rules described here:</p>
 <p ><a href="https://docs.datacontroller.io/column-level-security/">https://docs.datacontroller.io/column-level-security/</a></p>
-<p >Usage:</p>
-<p >mpe_columnlevelsecurity(TGTLIB,TGTDS,work.inds ,mode=VIEW ,clsds=dc.mpe_cls ,groupds=work.groups ,outds=work.final ,outmeta=work.cls_rules )</p>
-<dl class="params"><dt>Parameters</dt><dd>
+<p >Usage: </p><pre class="fragment">%mpe_columnlevelsecurity(TGTLIB,TGTDS,work.inds
+  ,mode=VIEW
+  ,clsds=dc.mpe_cls
+  ,groupds=work.groups
+  ,outds=work.final
+  ,outmeta=work.cls_rules
+)
+</pre><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">tgtlib</td><td>The libref of the target table </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">tgtds</td><td>The dataset reference of the target table </td></tr>

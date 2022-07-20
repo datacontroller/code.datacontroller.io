@@ -5,7 +5,6 @@ var dir_28cd64f980436b9184807de48c3cf4aa =
     [ "bitemporal_dataloader.test.1.sas", "bitemporal__dataloader_8test_81_8sas.html", null ],
     [ "bitemporal_dataloader.test.2.sas", "bitemporal__dataloader_8test_82_8sas.html", null ],
     [ "bitemporal_dataloader.test.3.sas", "bitemporal__dataloader_8test_83_8sas.html", null ],
-    [ "mk_metafolder.sas", "mk__metafolder_8sas.html", null ],
     [ "mpe_accesscheck.sas", "mpe__accesscheck_8sas.html", null ],
     [ "mpe_alerts.sas", "mpe__alerts_8sas.html", null ],
     [ "mpe_columnlevelsecurity.sas", "mpe__columnlevelsecurity_8sas.html", null ],
