@@ -133,7 +133,9 @@ $(document).ready(function(){initNavTree('bitemporal__dataloader_8sas.html','');
 
 <p><a href="bitemporal__dataloader_8sas_source.html">Go to the source code of this file.</a></p>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p >This macro will add a correctly prepared staging table to a BiTemporal base table. The staging table should have a unique business key (macro has not been tested for loading PKs with a business temporal history)</p>
+<div class="textblock"><p >Generic loader for multiple load types (UPDATE, SCD2, BITEMPORAL).</p>
+<p >Handles all elements including metadata validation, PK checking, closeouts, locking, logging, etc.</p>
+<p >The staging table must be prepared with a unique business key. For bitemporal this means a snapshot at both technical AND business time.</p>
 <p >ASSUMPTIONS:</p><ul>
 <li>Base table has relevant datetime vars: 2xTechnical, 2xBusiness, 1xProcessed</li>
 <li>Staging table omits Technical or Processed datetimes (has Business only)</li>
@@ -147,27 +149,6 @@ $(document).ready(function(){initNavTree('bitemporal__dataloader_8sas.html','');
 </ul>
 <p >Areas for optimisation</p><ul>
 <li>loading temporal history (currently experimental)</li>
-</ul>
-<h4>Global Variables  The following global macro variables are used. These should be replaced by macro parameters in future releases.  @li <code>dc_dttmtfmt</code>   SAS Macros </h4>
-<ul>
-<li><a class="el" href="bitemporal__closeouts_8sas.html" title="Closes out records.">bitemporal_closeouts.sas</a> </li>
-<li>dc_assignlib.sas </li>
-<li><a class="el" href="mf__existvar_8sas.html" title="Checks if a variable exists in a data set.">mf_existvar.sas</a> </li>
-<li><a class="el" href="mf__fmtdttm_8sas.html" title="Returns E8601DT26.6 if compatible else DATETIME19.3.">mf_fmtdttm.sas</a> </li>
-<li><a class="el" href="mf__getattrn_8sas.html" title="Returns a numeric attribute of a dataset.">mf_getattrn.sas</a> </li>
-<li><a class="el" href="mf__getengine_8sas.html" title="Returns the engine type of a SAS library.">mf_getengine.sas</a> </li>
-<li><a class="el" href="mf__getschema_8sas.html" title="Returns the database schema of a SAS library.">mf_getschema.sas</a> </li>
-<li><a class="el" href="mf__getuniquename_8sas.html" title="Returns a shortened (32 char) GUID as a valid SAS name.">mf_getuniquename.sas</a> </li>
-<li><a class="el" href="mf__getuser_8sas.html" title="Returns a userid according to session context.">mf_getuser.sas</a> </li>
-<li><a class="el" href="mf__getvarlist_8sas.html" title="Returns dataset variable list direct from header.">mf_getvarlist.sas</a> </li>
-<li><a class="el" href="mf__verifymacvars_8sas.html" title="Checks if a set of macro variables exist AND contain values.">mf_verifymacvars.sas</a> </li>
-<li><a class="el" href="mf__wordsinstr1butnotstr2_8sas.html" title="Returns words that are in string 1 but not in string 2.">mf_wordsinstr1butnotstr2.sas</a> </li>
-<li><a class="el" href="mp__abort_8sas.html" title="abort gracefully according to context">mp_abort.sas</a> </li>
-<li><a class="el" href="mp__dropmembers_8sas.html" title="Drops tables / views (if they exist) without warnings in the log.">mp_dropmembers.sas</a> </li>
-<li><a class="el" href="mp__lockanytable_8sas.html" title="Mechanism for locking tables to prevent parallel modifications.">mp_lockanytable.sas</a> </li>
-<li><a class="el" href="mp__lockfilecheck_8sas.html" title="Aborts if a SAS lock file is in place, or if one cannot be applied.">mp_lockfilecheck.sas</a> </li>
-<li><a class="el" href="mp__retainedkey_8sas.html" title="Generate and apply retained key values to a staging table.">mp_retainedkey.sas</a> </li>
-<li><a class="el" href="mp__storediffs_8sas.html" title="Converts deletes/changes/appends into a single audit table.">mp_storediffs.sas</a></li>
 </ul>
 <h2><a class="anchor" id="autotoc_md12"></a>
 Supporting tables</h2>
@@ -211,10 +192,36 @@ MPE_DATALOADS</h3>
   </table>
   </dd>
 </dl>
+<h4>Global Variables </h4>
+<p >The following global macro variables are used. These should be replaced by macro parameters in future releases.</p>
+<ul>
+<li><code>dc_dttmtfmt</code></li>
+</ul>
+<h4>SAS Macros </h4>
+<ul>
+<li><a class="el" href="bitemporal__closeouts_8sas.html" title="Closes out records.">bitemporal_closeouts.sas</a> </li>
+<li>dc_assignlib.sas </li>
+<li><a class="el" href="mf__existvar_8sas.html" title="Checks if a variable exists in a data set.">mf_existvar.sas</a> </li>
+<li><a class="el" href="mf__fmtdttm_8sas.html" title="Returns E8601DT26.6 if compatible else DATETIME19.3.">mf_fmtdttm.sas</a> </li>
+<li><a class="el" href="mf__getattrn_8sas.html" title="Returns a numeric attribute of a dataset.">mf_getattrn.sas</a> </li>
+<li><a class="el" href="mf__getengine_8sas.html" title="Returns the engine type of a SAS library.">mf_getengine.sas</a> </li>
+<li><a class="el" href="mf__getschema_8sas.html" title="Returns the database schema of a SAS library.">mf_getschema.sas</a> </li>
+<li><a class="el" href="mf__getuniquename_8sas.html" title="Returns a shortened (32 char) GUID as a valid SAS name.">mf_getuniquename.sas</a> </li>
+<li><a class="el" href="mf__getuser_8sas.html" title="Returns a userid according to session context.">mf_getuser.sas</a> </li>
+<li><a class="el" href="mf__getvarlist_8sas.html" title="Returns dataset variable list direct from header.">mf_getvarlist.sas</a> </li>
+<li><a class="el" href="mf__verifymacvars_8sas.html" title="Checks if a set of macro variables exist AND contain values.">mf_verifymacvars.sas</a> </li>
+<li><a class="el" href="mf__wordsinstr1butnotstr2_8sas.html" title="Returns words that are in string 1 but not in string 2.">mf_wordsinstr1butnotstr2.sas</a> </li>
+<li><a class="el" href="mp__abort_8sas.html" title="abort gracefully according to context">mp_abort.sas</a> </li>
+<li><a class="el" href="mp__dropmembers_8sas.html" title="Drops tables / views (if they exist) without warnings in the log.">mp_dropmembers.sas</a> </li>
+<li><a class="el" href="mp__lockanytable_8sas.html" title="Mechanism for locking tables to prevent parallel modifications.">mp_lockanytable.sas</a> </li>
+<li><a class="el" href="mp__lockfilecheck_8sas.html" title="Aborts if a SAS lock file is in place, or if one cannot be applied.">mp_lockfilecheck.sas</a> </li>
+<li><a class="el" href="mp__retainedkey_8sas.html" title="Generate and apply retained key values to a staging table.">mp_retainedkey.sas</a> </li>
+<li><a class="el" href="mp__storediffs_8sas.html" title="Converts deletes/changes/appends into a single audit table.">mp_storediffs.sas</a></li>
+</ul>
 <dl class="section version"><dt>Version</dt><dd>9.3 </dd></dl>
 <dl class="section author"><dt>Author</dt><dd>Allan Bowe </dd></dl>
-<dl class="section copyright"><dt>Copyright</dt><dd>4GL Apps Ltd - this is a licensed product and is NOT FOR RESALE OR DISTRIBUTION.</dd></dl>
-<dl class="section warning"><dt>Warning</dt><dd>multitemporal loads (bitemporal for multiple points in time) are in experimental stage </dd></dl>
+<dl class="section copyright"><dt>Copyright</dt><dd>4GL Apps Ltd. This code may only be used within Data Controller and may not be re-distributed or re-sold without the express permission of 4GL Apps Ltd. Data Controller is free for up to 5 users and may be downloaded from here: <a href="https://4gl.uk/dcdeploy">https://4gl.uk/dcdeploy</a></dd></dl>
+<dl class="section warning"><dt>Warning</dt><dd>multitemporal loads (bitemporal for multiple points in busienss time) are in experimental stage </dd></dl>
 
 <p class="definition">Definition in file <a class="el" href="bitemporal__dataloader_8sas_source.html">bitemporal_dataloader.sas</a>.</p>
 </div></div><!-- contents -->
