@@ -2,7 +2,7 @@ var indexSectionsWithContent =
 {
   0: "bcdefglmprstuv",
   1: "bcdefglmprstuv",
-  2: "t"
+  2: "st"
 };
 
 var indexSectionNames =
