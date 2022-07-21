@@ -133,27 +133,28 @@ $(document).ready(function(){initNavTree('mpe__datacatalog__vars_8ddl_source.htm
 <div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="comment">  @details</span></div>
 <div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="comment"></span> </div>
 <div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="comment">  @version 9.3</span></div>
-<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="comment">  @author 4GL Apps Ltd</span></div>
-<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="comment">  @copyright 4GL Apps Ltd</span></div>
-<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="comment">**/</span></div>
-<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span> </div>
-<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span>create table &amp;curlib..mpe_datacatalog_vars(</div>
-<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span>    TX_FROM <span class="keywordtype">float</span> format=datetime19.,</div>
-<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span>    TX_TO <span class="keywordtype">float</span> format=datetime19.,</div>
-<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span>    libref <span class="keywordtype">char</span>(8) label=<span class="stringliteral">&#39;Library Name&#39;</span>,</div>
-<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span>    dsn <span class="keywordtype">char</span>(64) label=<span class="stringliteral">&#39;Table Name&#39;</span>,</div>
-<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>    memtype <span class="keywordtype">char</span>(8) label=<span class="stringliteral">&#39;Member Type&#39;</span>,</div>
-<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>    name <span class="keywordtype">char</span>(64) label=<span class="stringliteral">&#39;Column Name&#39;</span>,</div>
-<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>    type <span class="keywordtype">char</span>(16) label=<span class="stringliteral">&#39;Column Type&#39;</span>,</div>
-<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>    length num label=<span class="stringliteral">&#39;Column Length&#39;</span>,</div>
-<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>    varnum num label=<span class="stringliteral">&#39;Column Number in Table&#39;</span>,</div>
-<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>    label <span class="keywordtype">char</span>(512) label=<span class="stringliteral">&#39;Column Label&#39;</span>,</div>
-<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>    format <span class="keywordtype">char</span>(49) label=<span class="stringliteral">&#39;Column Format&#39;</span>,</div>
-<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>    idxusage <span class="keywordtype">char</span>(9) label=<span class="stringliteral">&#39;Column Index Type&#39;</span>,</div>
-<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>    notnull <span class="keywordtype">char</span>(3) label=<span class="stringliteral">&#39;Not NULL?&#39;</span>,</div>
-<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>    pk_ind num label=<span class="stringliteral">&quot;Primary Key Indicator (1=Primary Key field)&quot;</span>,</div>
-<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>  constraint pk_mpe_datacatalog_vars</div>
-<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>      primary key(libref,dsn,name,tx_to));</div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="comment">  @author 4GL Apps Ltd. Data Controller is free for up to 5 users and may be</span></div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="comment">    downloaded from here:  https://4gl.uk/dcdeploy</span></div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="comment">  @copyright 4GL Apps Ltd</span></div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="comment">**/</span></div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span> </div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span>create table &amp;curlib..mpe_datacatalog_vars(</div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span>    TX_FROM <span class="keywordtype">float</span> format=datetime19.,</div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span>    TX_TO <span class="keywordtype">float</span> format=datetime19.,</div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span>    libref <span class="keywordtype">char</span>(8) label=<span class="stringliteral">&#39;Library Name&#39;</span>,</div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>    dsn <span class="keywordtype">char</span>(64) label=<span class="stringliteral">&#39;Table Name&#39;</span>,</div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>    memtype <span class="keywordtype">char</span>(8) label=<span class="stringliteral">&#39;Member Type&#39;</span>,</div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>    name <span class="keywordtype">char</span>(64) label=<span class="stringliteral">&#39;Column Name&#39;</span>,</div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>    type <span class="keywordtype">char</span>(16) label=<span class="stringliteral">&#39;Column Type&#39;</span>,</div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>    length num label=<span class="stringliteral">&#39;Column Length&#39;</span>,</div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>    varnum num label=<span class="stringliteral">&#39;Column Number in Table&#39;</span>,</div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>    label <span class="keywordtype">char</span>(512) label=<span class="stringliteral">&#39;Column Label&#39;</span>,</div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>    format <span class="keywordtype">char</span>(49) label=<span class="stringliteral">&#39;Column Format&#39;</span>,</div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>    idxusage <span class="keywordtype">char</span>(9) label=<span class="stringliteral">&#39;Column Index Type&#39;</span>,</div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>    notnull <span class="keywordtype">char</span>(3) label=<span class="stringliteral">&#39;Not NULL?&#39;</span>,</div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>    pk_ind num label=<span class="stringliteral">&quot;Primary Key Indicator (1=Primary Key field)&quot;</span>,</div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>  constraint pk_mpe_datacatalog_vars</div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>      primary key(libref,dsn,name,tx_to));</div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- HTML footer for doxygen 1.8.17-->

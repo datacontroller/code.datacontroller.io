@@ -147,77 +147,76 @@ $(document).ready(function(){initNavTree('mpe__accesscheck_8sas_source.html','')
 <div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="comment">    which are granted the access_level requested.</span></div>
 <div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span><span class="comment"></span> </div>
 <div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span><span class="comment">  @version 9.2</span></div>
-<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span><span class="comment">  @author 4GL Apps Ltd</span></div>
-<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span><span class="comment">  @copyright 4GL Apps Ltd.  This code may only be used within Data Controller</span></div>
-<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span><span class="comment">    and may not be re-distributed or re-sold without the express permission of</span></div>
-<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span><span class="comment">    4GL Apps Ltd.</span></div>
-<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span><span class="comment">    Data Controller is free for up to 5 users and may be downloaded from</span></div>
-<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span><span class="comment">    here:  https://4gl.uk/dcdeploy</span></div>
-<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span><span class="comment">**/</span></div>
-<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span> </div>
-<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>%macro mpe_accesscheck(</div>
-<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>    base_table   <span class="comment">/* base table to check for */</span></div>
-<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>    ,outds=med_accesscheck <span class="comment">/* WORK table to contain access details */</span></div>
-<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>    ,user= <span class="comment">/* metadata user to check for */</span></div>
-<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>    ,access_level=APPROVE</div>
-<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>  );</div>
-<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span> </div>
-<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>  %<span class="keywordflow">if</span> &amp;user= %then %let user=%mf_getuser();</div>
-<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span> </div>
-<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>  %<span class="keywordflow">if</span> %index(&amp;outds,.) %then %<span class="keywordflow">do</span>;</div>
-<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>    %local lib ds;</div>
-<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>    %let lib=%scan(&amp;outds,1,.);</div>
-<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>    %let ds=%scan(&amp;outds,2,.);</div>
-<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>    %<span class="keywordflow">if</span> %upcase(&amp;lib) ne WORK %then %<span class="keywordflow">do</span>;</div>
-<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>      %mp_abort(msg=outds should be a WORK table</div>
-<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>        ,mac=mpe_accesscheck);</div>
-<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>    %end;</div>
-<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>  %end;</div>
-<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>  %<span class="keywordflow">else</span> %let ds=&amp;outds;</div>
-<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span> </div>
-<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>  %mp_abort(</div>
-<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>    iftrue=(%mf_verifymacvars(base_table user access_level)=0)</div>
-<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>    ,mac=bitemporal_dataloader</div>
-<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>    ,msg=%str(Missing base_table/user access_level)</div>
-<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>  )</div>
-<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span> </div>
-<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>  <span class="comment">/* ensure any existing table is dropped */</span></div>
-<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>  %mp_dropmembers(&amp;ds)</div>
-<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span> </div>
-<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>  <span class="comment">/* create a new table for temp use */</span></div>
-<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>  data; run;</div>
-<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>  %local tempds; %let tempds=&amp;syslast;</div>
-<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span> </div>
-<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>  <span class="comment">/* overwrite with the list of groups */</span></div>
-<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>  %mpe_getgroups(user=&amp;user,outds=&amp;tempds);</div>
-<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span> </div>
-<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>  %<span class="keywordflow">if</span> &amp;_debug ge 131 %then %<span class="keywordflow">do</span>;</div>
-<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>    data _null_;</div>
-<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>      <span class="keyword">set</span> &amp;tempds;</div>
-<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>      putlog (_all_)(=);</div>
-<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>    run;</div>
-<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>  %end;</div>
-<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span> </div>
-<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>  proc sql;</div>
-<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>  create table &amp;outds as</div>
-<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>  select * from &amp;tempds</div>
-<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>    where groupname=<span class="stringliteral">&quot;&amp;mpeadmins&quot;</span></div>
-<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>      or groupname in</div>
-<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>      (select sas_group from &amp;mpelib..mpe_security</div>
-<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>        where &amp;dc_dttmtfmt. lt tx_to</div>
-<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>        and access_level=<span class="stringliteral">&quot;&amp;access_level&quot;</span></div>
-<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>          &amp; (</div>
-<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>            (libref=<span class="stringliteral">&quot;%scan(&amp;base_table,1,.)&quot;</span> and dsn=<span class="stringliteral">&quot;%scan(&amp;base_table,2,.)&quot;</span>)</div>
-<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>            or (libref=<span class="stringliteral">&quot;%scan(&amp;base_table,1,.)&quot;</span> and dsn=<span class="stringliteral">&quot;*ALL*&quot;</span>)</div>
-<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>            or (libref=<span class="stringliteral">&quot;*ALL*&quot;</span>)</div>
-<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>          )</div>
-<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>      );</div>
-<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span> </div>
-<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>%put base_table=&amp;base_table;</div>
-<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>%put libref=%scan(&amp;base_table,1,.);</div>
-<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>%put dsn=%scan(&amp;base_table,2,.);</div>
-<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>%put access_level=&amp;access_level;</div>
-<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>%mend mpe_accesscheck;</div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span><span class="comment">  @author 4GL Apps Ltd. Data Controller is free for up to 5 users and may be</span></div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span><span class="comment">    downloaded from here:  https://4gl.uk/dcdeploy</span></div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span><span class="comment">  @copyright 4GL Apps Ltd.  This code may only be used within Data Controller</span></div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span><span class="comment">    and may not be re-distributed or re-sold without the express permission of</span></div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span><span class="comment">    4GL Apps Ltd.</span></div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span><span class="comment">**/</span></div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span> </div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>%macro mpe_accesscheck(</div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>    base_table   <span class="comment">/* base table to check for */</span></div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>    ,outds=med_accesscheck <span class="comment">/* WORK table to contain access details */</span></div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>    ,user= <span class="comment">/* metadata user to check for */</span></div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>    ,access_level=APPROVE</div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>  );</div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span> </div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>  %<span class="keywordflow">if</span> &amp;user= %then %let user=%mf_getuser();</div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span> </div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>  %<span class="keywordflow">if</span> %index(&amp;outds,.) %then %<span class="keywordflow">do</span>;</div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>    %local lib ds;</div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>    %let lib=%scan(&amp;outds,1,.);</div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>    %let ds=%scan(&amp;outds,2,.);</div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>    %<span class="keywordflow">if</span> %upcase(&amp;lib) ne WORK %then %<span class="keywordflow">do</span>;</div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>      %mp_abort(msg=outds should be a WORK table</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>        ,mac=mpe_accesscheck);</div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>    %end;</div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>  %end;</div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>  %<span class="keywordflow">else</span> %let ds=&amp;outds;</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span> </div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>  %mp_abort(</div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>    iftrue=(%mf_verifymacvars(base_table user access_level)=0)</div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>    ,mac=bitemporal_dataloader</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>    ,msg=%str(Missing base_table/user access_level)</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>  )</div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span> </div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>  <span class="comment">/* ensure any existing table is dropped */</span></div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>  %mp_dropmembers(&amp;ds)</div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span> </div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>  <span class="comment">/* create a new table for temp use */</span></div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>  data; run;</div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>  %local tempds; %let tempds=&amp;syslast;</div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span> </div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>  <span class="comment">/* overwrite with the list of groups */</span></div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>  %mpe_getgroups(user=&amp;user,outds=&amp;tempds);</div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span> </div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>  %<span class="keywordflow">if</span> &amp;_debug ge 131 %then %<span class="keywordflow">do</span>;</div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>    data _null_;</div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>      <span class="keyword">set</span> &amp;tempds;</div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>      putlog (_all_)(=);</div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>    run;</div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>  %end;</div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span> </div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>  proc sql;</div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>  create table &amp;outds as</div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>  select * from &amp;tempds</div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>    where groupname=<span class="stringliteral">&quot;&amp;mpeadmins&quot;</span></div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>      or groupname in</div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>      (select sas_group from &amp;mpelib..mpe_security</div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>        where &amp;dc_dttmtfmt. lt tx_to</div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>        and access_level=<span class="stringliteral">&quot;&amp;access_level&quot;</span></div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>          &amp; (</div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>            (libref=<span class="stringliteral">&quot;%scan(&amp;base_table,1,.)&quot;</span> and dsn=<span class="stringliteral">&quot;%scan(&amp;base_table,2,.)&quot;</span>)</div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>            or (libref=<span class="stringliteral">&quot;%scan(&amp;base_table,1,.)&quot;</span> and dsn=<span class="stringliteral">&quot;*ALL*&quot;</span>)</div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>            or (libref=<span class="stringliteral">&quot;*ALL*&quot;</span>)</div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>          )</div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>      );</div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span> </div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>%put base_table=&amp;base_table;</div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>%put libref=%scan(&amp;base_table,1,.);</div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>%put dsn=%scan(&amp;base_table,2,.);</div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>%put access_level=&amp;access_level;</div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>%mend mpe_accesscheck;</div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- HTML footer for doxygen 1.8.17-->

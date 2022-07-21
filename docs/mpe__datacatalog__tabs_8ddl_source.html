@@ -133,24 +133,25 @@ $(document).ready(function(){initNavTree('mpe__datacatalog__tabs_8ddl_source.htm
 <div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="comment">  @details</span></div>
 <div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="comment"></span> </div>
 <div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="comment">  @version 9.3</span></div>
-<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="comment">  @author 4GL Apps Ltd</span></div>
-<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="comment">  @copyright 4GL Apps Ltd</span></div>
-<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="comment">**/</span></div>
-<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span> </div>
-<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span>create table &amp;curlib..mpe_datacatalog_TABS(</div>
-<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span>    TX_FROM <span class="keywordtype">float</span> format=datetime19.,</div>
-<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span>    TX_TO <span class="keywordtype">float</span> format=datetime19.,</div>
-<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span>    libref <span class="keywordtype">char</span>(8) label=<span class="stringliteral">&#39;Library Name&#39;</span>,</div>
-<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span>    dsn <span class="keywordtype">char</span>(64) label=<span class="stringliteral">&#39;Member Name&#39;</span>,</div>
-<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>    memtype <span class="keywordtype">char</span>(8) label=<span class="stringliteral">&#39;Member Type&#39;</span>,</div>
-<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>    dbms_memtype <span class="keywordtype">char</span>(32) label=<span class="stringliteral">&#39;DBMS Member Type&#39;</span>,</div>
-<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>    memlabel <span class="keywordtype">char</span>(512) label=<span class="stringliteral">&#39;Data Set Label&#39;</span>,</div>
-<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>    typemem <span class="keywordtype">char</span>(8) label=<span class="stringliteral">&#39;Data Set Type&#39;</span>,</div>
-<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>    nvar num label=<span class="stringliteral">&#39;Number of Variables&#39;</span>,</div>
-<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>    compress <span class="keywordtype">char</span>(8) label=<span class="stringliteral">&#39;Compression Routine&#39;</span>,</div>
-<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>    pk_fields <span class="keywordtype">char</span>(512) label=<span class="stringliteral">&#39;Primary Key Fields (identified by being in a constraint that is both Unique and Not Null)&#39;</span>,</div>
-<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>  constraint pk_mpe_datacatalog_TABS</div>
-<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>      primary key(libref,dsn,tx_to));</div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="comment">  @author 4GL Apps Ltd. Data Controller is free for up to 5 users and may be</span></div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="comment">    downloaded from here:  https://4gl.uk/dcdeploy</span></div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="comment">  @copyright 4GL Apps Ltd</span></div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="comment">**/</span></div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span> </div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span>create table &amp;curlib..mpe_datacatalog_TABS(</div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span>    TX_FROM <span class="keywordtype">float</span> format=datetime19.,</div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span>    TX_TO <span class="keywordtype">float</span> format=datetime19.,</div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span>    libref <span class="keywordtype">char</span>(8) label=<span class="stringliteral">&#39;Library Name&#39;</span>,</div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>    dsn <span class="keywordtype">char</span>(64) label=<span class="stringliteral">&#39;Member Name&#39;</span>,</div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>    memtype <span class="keywordtype">char</span>(8) label=<span class="stringliteral">&#39;Member Type&#39;</span>,</div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>    dbms_memtype <span class="keywordtype">char</span>(32) label=<span class="stringliteral">&#39;DBMS Member Type&#39;</span>,</div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>    memlabel <span class="keywordtype">char</span>(512) label=<span class="stringliteral">&#39;Data Set Label&#39;</span>,</div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>    typemem <span class="keywordtype">char</span>(8) label=<span class="stringliteral">&#39;Data Set Type&#39;</span>,</div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>    nvar num label=<span class="stringliteral">&#39;Number of Variables&#39;</span>,</div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>    compress <span class="keywordtype">char</span>(8) label=<span class="stringliteral">&#39;Compression Routine&#39;</span>,</div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>    pk_fields <span class="keywordtype">char</span>(512) label=<span class="stringliteral">&#39;Primary Key Fields (identified by being in a constraint that is both Unique and Not Null)&#39;</span>,</div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>  constraint pk_mpe_datacatalog_TABS</div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>      primary key(libref,dsn,tx_to));</div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- HTML footer for doxygen 1.8.17-->

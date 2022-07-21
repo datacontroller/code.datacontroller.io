@@ -168,108 +168,107 @@ $(document).ready(function(){initNavTree('mpe__columnlevelsecurity_8sas_source.h
 <div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span><span class="comment"></span> </div>
 <div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span><span class="comment">  &lt;h4&gt; SAS Macros &lt;/h4&gt;</span></div>
 <div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span><span class="comment"></span> </div>
-<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span><span class="comment">  @author 4GL Apps Ltd</span></div>
-<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span><span class="comment">  @copyright 4GL Apps Ltd.  This code may only be used within Data Controller</span></div>
-<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span><span class="comment">    and may not be re-distributed or re-sold without the express permission of</span></div>
-<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span><span class="comment">    4GL Apps Ltd.</span></div>
-<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span><span class="comment">    Data Controller is free for up to 5 users and may be downloaded from</span></div>
-<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span><span class="comment">    here:  https://4gl.uk/dcdeploy</span></div>
-<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span><span class="comment">**/</span></div>
-<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span> </div>
-<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>%macro mpe_columnlevelsecurity(tgtlib,tgtds,inds</div>
-<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>  ,mode=VIEW</div>
-<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>  ,groupds=work.groups</div>
-<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>  ,clsds=work.clsview</div>
-<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>  ,outds=CLSVIEW</div>
-<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>  ,outmeta=work.cls_rules</div>
-<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>);</div>
-<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span> </div>
-<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>%local col_list is_admin;</div>
-<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span><span class="comment">/* filter for the appropriate rules */</span></div>
-<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>proc sql;</div>
-<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>create table &amp;outmeta as</div>
-<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>  select CLS_VARIABLE_NM,</div>
-<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>    min(<span class="keywordflow">case</span> when CLS_HIDE=1 then 1 <span class="keywordflow">else</span> 0 end) as CLS_HIDE</div>
-<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>  from &amp;clsds</div>
-<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>  where &amp;dc_dttmtfmt. lt tx_to</div>
-<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>    and CLS_SCOPE in (<span class="stringliteral">&quot;&amp;mode&quot;</span>,<span class="stringliteral">&#39;ALL&#39;</span>)</div>
-<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>    and CLS_ACTIVE=1</div>
-<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>  %if &amp;mode=VIEW %then %do;</div>
-<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>    and CLS_HIDE ne 1</div>
-<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>  %end;</div>
-<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>    and upcase(CLS_GROUP) in (select upcase(groupname) from &amp;groupds)</div>
-<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>    and CLS_LIBREF=&quot;%upcase(&amp;tgtlib)&quot;</div>
-<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>    and CLS_TABLE=&quot;%upcase(&amp;tgtds)&quot;</div>
-<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>  group by CLS_VARIABLE_NM;</div>
-<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span> </div>
-<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>%let is_admin=0;</div>
-<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>proc sql;</div>
-<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>select count(*) into: is_admin from &amp;groupds where groupname=&quot;&amp;MPEADMINS&quot;;</div>
-<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>%put &amp;sysmacroname: &amp;=is_admin;</div>
-<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>%if %mf_nobs(work.cls_rules) = 0 or &amp;is_admin&gt;0 %then %do;</div>
-<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>  %put &amp;sysmacroname: no CLS rules to apply;</div>
-<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>  %put &amp;=is_admin;</div>
-<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>  <span class="comment">/* copy using append for speed */</span></div>
-<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>  data &amp;outds;</div>
-<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>    set &amp;inds;</div>
-<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>    stop;</div>
-<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>  run;</div>
-<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>  proc append base=&amp;outds data=&amp;inds;</div>
-<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>  run;</div>
-<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>  <span class="comment">/* ensure CLS_RULES is empty in case of admin */</span></div>
-<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>  data &amp;outmeta;</div>
-<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>    set &amp;outmeta;</div>
-<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>    stop;</div>
-<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>  run;</div>
-<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>  %return;</div>
-<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>%end;</div>
-<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>%else %if &amp;mode=VIEW %then %do;</div>
-<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>  <span class="comment">/* just send back the relevant columns */</span></div>
-<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>  %let col_list=0;</div>
-<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>  proc sql noprint;</div>
-<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>  select CLS_VARIABLE_NM into: col_list separated by &#39; &#39; from &amp;outmeta</div>
-<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>    where CLS_HIDE=0;</div>
-<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span> </div>
-<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>  %if &amp;col_list=0 %then %do;</div>
-<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>    <span class="comment">/*</span></div>
-<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span><span class="comment">      We have columns that are set to CLS_HIDE=1 but we do not have any to</span></div>
-<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span><span class="comment">      explicitly show.  Therefore we assume all columns are to be shown except</span></div>
-<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span><span class="comment">      those that are explicitly hidden.</span></div>
-<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span><span class="comment">    */</span></div>
-<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span>    proc sql noprint;</div>
-<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span>    select CLS_VARIABLE_NM into: col_list separated by &#39; &#39; from &amp;outmeta</div>
-<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span>      where CLS_HIDE=1;</div>
-<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span> </div>
-<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span>    data &amp;outds;</div>
-<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span>      set &amp;inds;</div>
-<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span>      drop &amp;col_list;</div>
-<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span>    run;</div>
-<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span>  %end;</div>
-<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span>  %else %do;</div>
-<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span>    data &amp;outds;</div>
-<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span>      set &amp;inds;</div>
-<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span>      keep &amp;col_list;</div>
-<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span>    run;</div>
-<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span>  %end;</div>
-<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span>%end;</div>
-<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span>%else %if &amp;mode=EDIT %then %do;</div>
-<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span>  <span class="comment">/*</span></div>
-<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span><span class="comment">    In this case we pass all columns and the frontend will filter out the</span></div>
-<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span><span class="comment">    ones that are not allowed to be edited.</span></div>
-<div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span><span class="comment">  */</span></div>
-<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span>  data &amp;outds;</div>
-<div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span>    set &amp;inds;</div>
-<div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span>    stop;</div>
-<div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span>  run;</div>
-<div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span>  proc append base=&amp;outds data=&amp;inds;</div>
-<div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span>  run;</div>
-<div class="line"><a id="l00137" name="l00137"></a><span class="lineno">  137</span>%end;</div>
-<div class="line"><a id="l00138" name="l00138"></a><span class="lineno">  138</span>%else %do;</div>
-<div class="line"><a id="l00139" name="l00139"></a><span class="lineno">  139</span>  %put &amp;sysmacroname: invalid mode - &amp;mode!;</div>
-<div class="line"><a id="l00140" name="l00140"></a><span class="lineno">  140</span>  %abort;</div>
-<div class="line"><a id="l00141" name="l00141"></a><span class="lineno">  141</span>%end;</div>
-<div class="line"><a id="l00142" name="l00142"></a><span class="lineno">  142</span> </div>
-<div class="line"><a id="l00143" name="l00143"></a><span class="lineno">  143</span>%mend mpe_columnlevelsecurity;</div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span><span class="comment">  @author 4GL Apps Ltd. Data Controller is free for up to 5 users and may be</span></div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span><span class="comment">    downloaded from here:  https://4gl.uk/dcdeploy</span></div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span><span class="comment">  @copyright 4GL Apps Ltd.  This code may only be used within Data Controller</span></div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span><span class="comment">    and may not be re-distributed or re-sold without the express permission of</span></div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span><span class="comment">    4GL Apps Ltd.</span></div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span><span class="comment">**/</span></div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span> </div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>%macro mpe_columnlevelsecurity(tgtlib,tgtds,inds</div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>  ,mode=VIEW</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>  ,groupds=work.groups</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>  ,clsds=work.clsview</div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>  ,outds=CLSVIEW</div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>  ,outmeta=work.cls_rules</div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>);</div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span> </div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>%local col_list is_admin;</div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span><span class="comment">/* filter for the appropriate rules */</span></div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>proc sql;</div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>create table &amp;outmeta as</div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>  select CLS_VARIABLE_NM,</div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>    min(<span class="keywordflow">case</span> when CLS_HIDE=1 then 1 <span class="keywordflow">else</span> 0 end) as CLS_HIDE</div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>  from &amp;clsds</div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>  where &amp;dc_dttmtfmt. lt tx_to</div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>    and CLS_SCOPE in (<span class="stringliteral">&quot;&amp;mode&quot;</span>,<span class="stringliteral">&#39;ALL&#39;</span>)</div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>    and CLS_ACTIVE=1</div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>  %if &amp;mode=VIEW %then %do;</div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>    and CLS_HIDE ne 1</div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>  %end;</div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>    and upcase(CLS_GROUP) in (select upcase(groupname) from &amp;groupds)</div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>    and CLS_LIBREF=&quot;%upcase(&amp;tgtlib)&quot;</div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>    and CLS_TABLE=&quot;%upcase(&amp;tgtds)&quot;</div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>  group by CLS_VARIABLE_NM;</div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span> </div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>%let is_admin=0;</div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>proc sql;</div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>select count(*) into: is_admin from &amp;groupds where groupname=&quot;&amp;MPEADMINS&quot;;</div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>%put &amp;sysmacroname: &amp;=is_admin;</div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>%if %mf_nobs(work.cls_rules) = 0 or &amp;is_admin&gt;0 %then %do;</div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>  %put &amp;sysmacroname: no CLS rules to apply;</div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>  %put &amp;=is_admin;</div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>  <span class="comment">/* copy using append for speed */</span></div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>  data &amp;outds;</div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>    set &amp;inds;</div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>    stop;</div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>  run;</div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>  proc append base=&amp;outds data=&amp;inds;</div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>  run;</div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>  <span class="comment">/* ensure CLS_RULES is empty in case of admin */</span></div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>  data &amp;outmeta;</div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>    set &amp;outmeta;</div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>    stop;</div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>  run;</div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>  %return;</div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>%end;</div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>%else %if &amp;mode=VIEW %then %do;</div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>  <span class="comment">/* just send back the relevant columns */</span></div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>  %let col_list=0;</div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>  proc sql noprint;</div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>  select CLS_VARIABLE_NM into: col_list separated by &#39; &#39; from &amp;outmeta</div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>    where CLS_HIDE=0;</div>
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span> </div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>  %if &amp;col_list=0 %then %do;</div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>    <span class="comment">/*</span></div>
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span><span class="comment">      We have columns that are set to CLS_HIDE=1 but we do not have any to</span></div>
+<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span><span class="comment">      explicitly show.  Therefore we assume all columns are to be shown except</span></div>
+<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span><span class="comment">      those that are explicitly hidden.</span></div>
+<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span><span class="comment">    */</span></div>
+<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>    proc sql noprint;</div>
+<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span>    select CLS_VARIABLE_NM into: col_list separated by &#39; &#39; from &amp;outmeta</div>
+<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span>      where CLS_HIDE=1;</div>
+<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span> </div>
+<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span>    data &amp;outds;</div>
+<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span>      set &amp;inds;</div>
+<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span>      drop &amp;col_list;</div>
+<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span>    run;</div>
+<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span>  %end;</div>
+<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span>  %else %do;</div>
+<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span>    data &amp;outds;</div>
+<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span>      set &amp;inds;</div>
+<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span>      keep &amp;col_list;</div>
+<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span>    run;</div>
+<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span>  %end;</div>
+<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span>%end;</div>
+<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span>%else %if &amp;mode=EDIT %then %do;</div>
+<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span>  <span class="comment">/*</span></div>
+<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span><span class="comment">    In this case we pass all columns and the frontend will filter out the</span></div>
+<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span><span class="comment">    ones that are not allowed to be edited.</span></div>
+<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span><span class="comment">  */</span></div>
+<div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span>  data &amp;outds;</div>
+<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span>    set &amp;inds;</div>
+<div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span>    stop;</div>
+<div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span>  run;</div>
+<div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span>  proc append base=&amp;outds data=&amp;inds;</div>
+<div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span>  run;</div>
+<div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span>%end;</div>
+<div class="line"><a id="l00137" name="l00137"></a><span class="lineno">  137</span>%else %do;</div>
+<div class="line"><a id="l00138" name="l00138"></a><span class="lineno">  138</span>  %put &amp;sysmacroname: invalid mode - &amp;mode!;</div>
+<div class="line"><a id="l00139" name="l00139"></a><span class="lineno">  139</span>  %abort;</div>
+<div class="line"><a id="l00140" name="l00140"></a><span class="lineno">  140</span>%end;</div>
+<div class="line"><a id="l00141" name="l00141"></a><span class="lineno">  141</span> </div>
+<div class="line"><a id="l00142" name="l00142"></a><span class="lineno">  142</span>%mend mpe_columnlevelsecurity;</div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- HTML footer for doxygen 1.8.17-->

@@ -134,119 +134,120 @@ $(document).ready(function(){initNavTree('mpe__tables_8ddl_source.html',''); ini
 <div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="comment"></span> </div>
 <div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="comment"></span> </div>
 <div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="comment">  @version 9.2</span></div>
-<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="comment">  @author 4GL Apps Ltd</span></div>
-<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="comment">  @copyright 4GL Apps Ltd</span></div>
-<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="comment">**/</span></div>
-<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span> </div>
-<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span>proc sql;</div>
-<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span>create table &amp;curlib..mpe_tables(</div>
-<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span>        tx_from num not <span class="keyword">null</span> format=datetime19.3,</div>
-<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span>        tx_to num not <span class="keyword">null</span> format=datetime19.3,</div>
-<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>        libref <span class="keywordtype">char</span>(8) not <span class="keyword">null</span>,</div>
-<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>        dsn <span class="keywordtype">char</span>(32) not <span class="keyword">null</span>,</div>
-<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>        num_of_approvals_required <span class="keywordtype">int</span>,</div>
-<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>        loadtype <span class="keywordtype">char</span>(12) ,</div>
-<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>        buskey <span class="keywordtype">char</span>(1000) ,</div>
-<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>        var_txfrom <span class="keywordtype">char</span>(32) ,</div>
-<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>        var_txto <span class="keywordtype">char</span>(32) ,</div>
-<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>        var_busfrom <span class="keywordtype">char</span>(32) ,</div>
-<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>        var_busto <span class="keywordtype">char</span>(32) ,</div>
-<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>        var_processed <span class="keywordtype">char</span>(32) ,</div>
-<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>        close_vars varchar(500),</div>
-<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>        pre_edit_hook <span class="keywordtype">char</span>(200),</div>
-<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>        post_edit_hook <span class="keywordtype">char</span>(200),</div>
-<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>        pre_approve_hook <span class="keywordtype">char</span>(200) ,</div>
-<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>        post_approve_hook <span class="keywordtype">char</span>(200) ,</div>
-<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>        signoff_cols varchar(500),</div>
-<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>        signoff_hook varchar(200),</div>
-<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>        notes <span class="keywordtype">char</span>(1000) ,</div>
-<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>        rk_underlying <span class="keywordtype">char</span>(1000) ,</div>
-<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>        audit_libds <span class="keywordtype">char</span>(41),</div>
-<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>    constraint pk_mpe_tables</div>
-<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>        primary key(tx_from, libref, dsn));</div>
-<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span> </div>
-<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>insert into &amp;syslast</div>
-<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>  <span class="keyword">set</span> tx_from=0</div>
-<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>    ,tx_to=<span class="stringliteral">&#39;31DEC5999:23:59:59&#39;</span>dt</div>
-<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>    ,libref=<span class="stringliteral">&quot;&amp;mpelib&quot;</span></div>
-<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>    ,dsn=<span class="stringliteral">&#39;MPE_LOCKANYTABLE&#39;</span></div>
-<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>    ,num_of_approvals_required=1</div>
-<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>    ,loadtype=<span class="stringliteral">&#39;UPDATE&#39;</span></div>
-<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>    ,buskey=<span class="stringliteral">&#39;LOCK_LIB LOCK_DS&#39;</span></div>
-<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>    ,notes=<span class="stringliteral">&#39;Should not normally be edited, means a process failed and was left hung&#39;</span></div>
-<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>  ;</div>
-<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span> </div>
-<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>insert into &amp;syslast</div>
-<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>  <span class="keyword">set</span> tx_from=0</div>
-<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>    ,tx_to=<span class="stringliteral">&#39;31DEC5999:23:59:59&#39;</span>dt</div>
-<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>    ,libref=<span class="stringliteral">&quot;&amp;mpelib&quot;</span></div>
-<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>    ,dsn=<span class="stringliteral">&#39;MPE_TABLES&#39;</span></div>
-<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>    ,num_of_approvals_required=1</div>
-<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>    ,loadtype=<span class="stringliteral">&#39;TXTEMPORAL&#39;</span></div>
-<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>    ,buskey=<span class="stringliteral">&#39;LIBREF DSN&#39;</span></div>
-<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>    ,var_txfrom=<span class="stringliteral">&#39;TX_FROM&#39;</span></div>
-<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>    ,var_txto=<span class="stringliteral">&#39;TX_TO&#39;</span></div>
-<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>    ,notes=<span class="stringliteral">&#39;This entry allows the MP Editor to edit itself!&#39;</span></div>
-<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>  ;</div>
-<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>insert into &amp;syslast</div>
-<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>  <span class="keyword">set</span> tx_from=0</div>
-<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>    ,tx_to=<span class="stringliteral">&#39;31DEC5999:23:59:59&#39;</span>dt</div>
-<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>    ,libref=<span class="stringliteral">&quot;&amp;mpelib&quot;</span></div>
-<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>    ,dsn=<span class="stringliteral">&#39;MPE_SECURITY&#39;</span></div>
-<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>    ,num_of_approvals_required=1</div>
-<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>    ,loadtype=<span class="stringliteral">&#39;TXTEMPORAL&#39;</span></div>
-<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>    ,buskey=<span class="stringliteral">&#39;LIBREF DSN ACCESS_LEVEL SAS_GROUP&#39;</span></div>
-<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>    ,var_txfrom=<span class="stringliteral">&#39;TX_FROM&#39;</span></div>
-<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>    ,var_txto=<span class="stringliteral">&#39;TX_TO&#39;</span></div>
-<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>    ,notes=<span class="stringliteral">&#39;Shows which metadata groups can edit which tables&#39;</span></div>
-<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>  ;</div>
-<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>insert into &amp;syslast</div>
-<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>  <span class="keyword">set</span> tx_from=0</div>
-<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>    ,tx_to=<span class="stringliteral">&#39;31DEC5999:23:59:59&#39;</span>dt</div>
-<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>    ,libref=<span class="stringliteral">&quot;&amp;mpelib&quot;</span></div>
-<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>    ,dsn=<span class="stringliteral">&#39;MPE_SELECTBOX&#39;</span></div>
-<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>    ,num_of_approvals_required=1</div>
-<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>    ,loadtype=<span class="stringliteral">&#39;TXTEMPORAL&#39;</span></div>
-<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>    ,buskey=<span class="stringliteral">&#39;SELECTBOX_RK&#39;</span></div>
-<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>    ,var_txfrom=<span class="stringliteral">&#39;VER_FROM_DTTM&#39;</span></div>
-<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>    ,var_txto=<span class="stringliteral">&#39;VER_TO_DTTM&#39;</span></div>
-<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>    ,notes=<span class="stringliteral">&#39;Can configure dropdowns for the front end&#39;</span></div>
-<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>    ,rk_underlying=<span class="stringliteral">&#39;SELECT_LIB SELECT_DS BASE_COLUMN SELECTBOX_VALUE&#39;</span></div>
-<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>  ;</div>
-<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>insert into &amp;mpelib..mpe_tables</div>
-<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>  <span class="keyword">set</span> tx_from=0</div>
-<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>    ,tx_to=<span class="stringliteral">&#39;31DEC5999:23:59:59&#39;</span>dt</div>
-<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>    ,libref=<span class="stringliteral">&quot;&amp;mpelib&quot;</span></div>
-<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>    ,dsn=<span class="stringliteral">&#39;MPE_X_TEST&#39;</span></div>
-<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>    ,num_of_approvals_required=1</div>
-<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>    ,loadtype=<span class="stringliteral">&#39;UPDATE&#39;</span></div>
-<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>    ,buskey=<span class="stringliteral">&#39;PRIMARY_KEY_FIELD&#39;</span></div>
-<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>    ,notes=<span class="stringliteral">&#39;Test table for controller&#39;</span></div>
-<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>  ;</div>
-<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>  insert into &amp;mpelib..mpe_tables</div>
-<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>    <span class="keyword">set</span> tx_from=0</div>
-<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>      ,tx_to=<span class="stringliteral">&#39;31DEC5999:23:59:59&#39;</span>dt</div>
-<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>      ,libref=<span class="stringliteral">&quot;&amp;mpelib&quot;</span></div>
-<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>      ,dsn=<span class="stringliteral">&#39;MPE_VALIDATIONS&#39;</span></div>
-<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>      ,num_of_approvals_required=1</div>
-<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>      ,loadtype=<span class="stringliteral">&#39;TXTEMPORAL&#39;</span></div>
-<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>      ,buskey=<span class="stringliteral">&#39;BASE_LIB BASE_DS BASE_COL RULE_TYPE&#39;</span></div>
-<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>      ,notes=<span class="stringliteral">&#39;Configuration of data quality rules in Editor component&#39;</span></div>
-<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>      ,var_txfrom=<span class="stringliteral">&#39;TX_FROM&#39;</span></div>
-<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span>      ,var_txto=<span class="stringliteral">&#39;TX_TO&#39;</span></div>
-<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span>    ;</div>
-<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>  insert into &amp;mpelib..mpe_tables</div>
-<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span>    <span class="keyword">set</span> tx_from=0</div>
-<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span>      ,tx_to=<span class="stringliteral">&#39;31DEC5999:23:59:59&#39;</span>dt</div>
-<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span>      ,libref=<span class="stringliteral">&quot;&amp;mpelib&quot;</span></div>
-<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span>      ,dsn=<span class="stringliteral">&#39;MPE_DATADICTIONARY&#39;</span></div>
-<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span>      ,num_of_approvals_required=1</div>
-<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span>      ,loadtype=<span class="stringliteral">&#39;TXTEMPORAL&#39;</span></div>
-<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span>      ,buskey=<span class="stringliteral">&#39;DD_TYPE DD_SOURCE&#39;</span></div>
-<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span>      ,notes=<span class="stringliteral">&#39;Configuration of data dictionary&#39;</span></div>
-<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span>      ,var_txfrom=<span class="stringliteral">&#39;TX_FROM&#39;</span></div>
-<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span>      ,var_txto=<span class="stringliteral">&#39;TX_TO&#39;</span></div>
-<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span>    ;</div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="comment">  @author 4GL Apps Ltd. Data Controller is free for up to 5 users and may be</span></div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="comment">    downloaded from here:  https://4gl.uk/dcdeploy</span></div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="comment">  @copyright 4GL Apps Ltd</span></div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="comment">**/</span></div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span> </div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span>proc sql;</div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span>create table &amp;curlib..mpe_tables(</div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span>        tx_from num not <span class="keyword">null</span> format=datetime19.3,</div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>        tx_to num not <span class="keyword">null</span> format=datetime19.3,</div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>        libref <span class="keywordtype">char</span>(8) not <span class="keyword">null</span>,</div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>        dsn <span class="keywordtype">char</span>(32) not <span class="keyword">null</span>,</div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>        num_of_approvals_required <span class="keywordtype">int</span>,</div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>        loadtype <span class="keywordtype">char</span>(12) ,</div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>        buskey <span class="keywordtype">char</span>(1000) ,</div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>        var_txfrom <span class="keywordtype">char</span>(32) ,</div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>        var_txto <span class="keywordtype">char</span>(32) ,</div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>        var_busfrom <span class="keywordtype">char</span>(32) ,</div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>        var_busto <span class="keywordtype">char</span>(32) ,</div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>        var_processed <span class="keywordtype">char</span>(32) ,</div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>        close_vars varchar(500),</div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>        pre_edit_hook <span class="keywordtype">char</span>(200),</div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>        post_edit_hook <span class="keywordtype">char</span>(200),</div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>        pre_approve_hook <span class="keywordtype">char</span>(200) ,</div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>        post_approve_hook <span class="keywordtype">char</span>(200) ,</div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>        signoff_cols varchar(500),</div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>        signoff_hook varchar(200),</div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>        notes <span class="keywordtype">char</span>(1000) ,</div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>        rk_underlying <span class="keywordtype">char</span>(1000) ,</div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>        audit_libds <span class="keywordtype">char</span>(41),</div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>    constraint pk_mpe_tables</div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>        primary key(tx_from, libref, dsn));</div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span> </div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>insert into &amp;syslast</div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>  <span class="keyword">set</span> tx_from=0</div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>    ,tx_to=<span class="stringliteral">&#39;31DEC5999:23:59:59&#39;</span>dt</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>    ,libref=<span class="stringliteral">&quot;&amp;mpelib&quot;</span></div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>    ,dsn=<span class="stringliteral">&#39;MPE_LOCKANYTABLE&#39;</span></div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>    ,num_of_approvals_required=1</div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>    ,loadtype=<span class="stringliteral">&#39;UPDATE&#39;</span></div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>    ,buskey=<span class="stringliteral">&#39;LOCK_LIB LOCK_DS&#39;</span></div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>    ,notes=<span class="stringliteral">&#39;Should not normally be edited, means a process failed and was left hung&#39;</span></div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>  ;</div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span> </div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>insert into &amp;syslast</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>  <span class="keyword">set</span> tx_from=0</div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>    ,tx_to=<span class="stringliteral">&#39;31DEC5999:23:59:59&#39;</span>dt</div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>    ,libref=<span class="stringliteral">&quot;&amp;mpelib&quot;</span></div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>    ,dsn=<span class="stringliteral">&#39;MPE_TABLES&#39;</span></div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>    ,num_of_approvals_required=1</div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>    ,loadtype=<span class="stringliteral">&#39;TXTEMPORAL&#39;</span></div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>    ,buskey=<span class="stringliteral">&#39;LIBREF DSN&#39;</span></div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>    ,var_txfrom=<span class="stringliteral">&#39;TX_FROM&#39;</span></div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>    ,var_txto=<span class="stringliteral">&#39;TX_TO&#39;</span></div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>    ,notes=<span class="stringliteral">&#39;This entry allows the MP Editor to edit itself!&#39;</span></div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>  ;</div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>insert into &amp;syslast</div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>  <span class="keyword">set</span> tx_from=0</div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>    ,tx_to=<span class="stringliteral">&#39;31DEC5999:23:59:59&#39;</span>dt</div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>    ,libref=<span class="stringliteral">&quot;&amp;mpelib&quot;</span></div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>    ,dsn=<span class="stringliteral">&#39;MPE_SECURITY&#39;</span></div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>    ,num_of_approvals_required=1</div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>    ,loadtype=<span class="stringliteral">&#39;TXTEMPORAL&#39;</span></div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>    ,buskey=<span class="stringliteral">&#39;LIBREF DSN ACCESS_LEVEL SAS_GROUP&#39;</span></div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>    ,var_txfrom=<span class="stringliteral">&#39;TX_FROM&#39;</span></div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>    ,var_txto=<span class="stringliteral">&#39;TX_TO&#39;</span></div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>    ,notes=<span class="stringliteral">&#39;Shows which metadata groups can edit which tables&#39;</span></div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>  ;</div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>insert into &amp;syslast</div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>  <span class="keyword">set</span> tx_from=0</div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>    ,tx_to=<span class="stringliteral">&#39;31DEC5999:23:59:59&#39;</span>dt</div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>    ,libref=<span class="stringliteral">&quot;&amp;mpelib&quot;</span></div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>    ,dsn=<span class="stringliteral">&#39;MPE_SELECTBOX&#39;</span></div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>    ,num_of_approvals_required=1</div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>    ,loadtype=<span class="stringliteral">&#39;TXTEMPORAL&#39;</span></div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>    ,buskey=<span class="stringliteral">&#39;SELECTBOX_RK&#39;</span></div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>    ,var_txfrom=<span class="stringliteral">&#39;VER_FROM_DTTM&#39;</span></div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>    ,var_txto=<span class="stringliteral">&#39;VER_TO_DTTM&#39;</span></div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>    ,notes=<span class="stringliteral">&#39;Can configure dropdowns for the front end&#39;</span></div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>    ,rk_underlying=<span class="stringliteral">&#39;SELECT_LIB SELECT_DS BASE_COLUMN SELECTBOX_VALUE&#39;</span></div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>  ;</div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>insert into &amp;mpelib..mpe_tables</div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>  <span class="keyword">set</span> tx_from=0</div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>    ,tx_to=<span class="stringliteral">&#39;31DEC5999:23:59:59&#39;</span>dt</div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>    ,libref=<span class="stringliteral">&quot;&amp;mpelib&quot;</span></div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>    ,dsn=<span class="stringliteral">&#39;MPE_X_TEST&#39;</span></div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>    ,num_of_approvals_required=1</div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>    ,loadtype=<span class="stringliteral">&#39;UPDATE&#39;</span></div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>    ,buskey=<span class="stringliteral">&#39;PRIMARY_KEY_FIELD&#39;</span></div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>    ,notes=<span class="stringliteral">&#39;Test table for controller&#39;</span></div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>  ;</div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>  insert into &amp;mpelib..mpe_tables</div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>    <span class="keyword">set</span> tx_from=0</div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>      ,tx_to=<span class="stringliteral">&#39;31DEC5999:23:59:59&#39;</span>dt</div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>      ,libref=<span class="stringliteral">&quot;&amp;mpelib&quot;</span></div>
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>      ,dsn=<span class="stringliteral">&#39;MPE_VALIDATIONS&#39;</span></div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>      ,num_of_approvals_required=1</div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>      ,loadtype=<span class="stringliteral">&#39;TXTEMPORAL&#39;</span></div>
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>      ,buskey=<span class="stringliteral">&#39;BASE_LIB BASE_DS BASE_COL RULE_TYPE&#39;</span></div>
+<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>      ,notes=<span class="stringliteral">&#39;Configuration of data quality rules in Editor component&#39;</span></div>
+<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span>      ,var_txfrom=<span class="stringliteral">&#39;TX_FROM&#39;</span></div>
+<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span>      ,var_txto=<span class="stringliteral">&#39;TX_TO&#39;</span></div>
+<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>    ;</div>
+<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span>  insert into &amp;mpelib..mpe_tables</div>
+<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span>    <span class="keyword">set</span> tx_from=0</div>
+<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span>      ,tx_to=<span class="stringliteral">&#39;31DEC5999:23:59:59&#39;</span>dt</div>
+<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span>      ,libref=<span class="stringliteral">&quot;&amp;mpelib&quot;</span></div>
+<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span>      ,dsn=<span class="stringliteral">&#39;MPE_DATADICTIONARY&#39;</span></div>
+<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span>      ,num_of_approvals_required=1</div>
+<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span>      ,loadtype=<span class="stringliteral">&#39;TXTEMPORAL&#39;</span></div>
+<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span>      ,buskey=<span class="stringliteral">&#39;DD_TYPE DD_SOURCE&#39;</span></div>
+<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span>      ,notes=<span class="stringliteral">&#39;Configuration of data dictionary&#39;</span></div>
+<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span>      ,var_txfrom=<span class="stringliteral">&#39;TX_FROM&#39;</span></div>
+<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span>      ,var_txto=<span class="stringliteral">&#39;TX_TO&#39;</span></div>
+<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span>    ;</div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- HTML footer for doxygen 1.8.17-->
