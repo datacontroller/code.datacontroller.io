@@ -192,8 +192,8 @@ $(document).ready(function(){initNavTree('columns__in__libds_8sas_source.html','
 <div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>%let var_is_libds=%mf_getuniquename();</div>
 <div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span> </div>
 <div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>data _null_;</div>
-<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>  length xl_libref base_lib select_lib rls_libref libref $8</div>
-<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>    xl_table base_ds select_ds rls_table dsn $32;</div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>  length xl_libref base_lib select_lib rls_libref cls_libref libref $8</div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>    xl_table base_ds select_ds rls_table cls_table dsn $32;</div>
 <div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>  <span class="keywordflow">if</span> _n_=1 then call missing(of _all_);</div>
 <div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>  <span class="keyword">set</span> work.source_row;</div>
 <div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>  &amp;varlibds=symget(<span class="stringliteral">&#39;libds&#39;</span>);</div>
