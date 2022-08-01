@@ -7,7 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=9" />
   <meta name="generator" content="Doxygen 1.9.3" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Data Controller: node_modules/@sasjs/core/base/mp_cleancsv.sas File Reference</title>
+  <title>Data Controller: sasjs/services/public/refreshlibinfo.test.sas Source File</title>
   <link href="tabs.css" rel="stylesheet" type="text/css" />
   <script type="text/javascript" src="jquery.js"></script>
   <script type="text/javascript" src="dynsections.js"></script>
@@ -105,7 +105,7 @@ var searchBox = new SearchBox("searchBox", "search",'Search','.html');
 </div>
 <script type="text/javascript">
 /* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
-$(document).ready(function(){initNavTree('mp__cleancsv_8sas.html',''); initResizable(); });
+$(document).ready(function(){initNavTree('refreshlibinfo_8test_8sas_source.html',''); initResizable(); });
 /* @license-end */
 </script>
 <div id="doc-content">
@@ -124,38 +124,57 @@ $(document).ready(function(){initNavTree('mp__cleancsv_8sas.html',''); initResiz
 </div>
 
 <div class="header">
-  <div class="headertitle"><div class="title">mp_cleancsv.sas File Reference</div></div>
+  <div class="headertitle"><div class="title">refreshlibinfo.test.sas</div></div>
 </div><!--header-->
 <div class="contents">
-
-<p>Fixes embedded cr / lf / crlf in CSV.  
-<a href="#details">More...</a></p>
-
-<p><a href="mp__cleancsv_8sas_source.html">Go to the source code of this file.</a></p>
-<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p >CSVs will sometimes contain lf or crlf within quotes (eg when saved by excel). When the termstr is ALSO lf or crlf that can be tricky to process using SAS defaults. This macro converts any csv to follow the convention of a windows excel file, applying CRLF line endings and converting embedded cr and crlf to lf.</p>
-<p >Usage: </p><pre class="fragment">fileref mycsv "/path/your/csv";
-%mp_cleancsv(in=mycsv,out=/path/new.csv)
-</pre> <dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">in=</td><td>(NOTPROVIDED) Provide path or fileref to input csv. If a period is found, it is assumed to be a file. </td></tr>
-    <tr><td class="paramname">out=</td><td>(NOTPROVIDED) Output path or fileref to output csv. If a period is found, it is assumed to be a file. </td></tr>
-    <tr><td class="paramname">qchar=</td><td>('22'x) Quote char - hex code 22 is the double quote.</td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section version"><dt>Version</dt><dd>9.2 </dd></dl>
-<dl class="section author"><dt>Author</dt><dd>Allan Bowe </dd></dl>
-
-<p class="definition">Definition in file <a class="el" href="mp__cleancsv_8sas_source.html">mp_cleancsv.sas</a>.</p>
-</div></div><!-- contents -->
+<a href="refreshlibinfo_8test_8sas.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="comment">/**</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="comment">  @file</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="comment">  @brief testing public/refreshlibinfo service</span></div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="comment"></span> </div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="comment">  &lt;h4&gt; SAS Macros &lt;/h4&gt;</span></div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="comment">  @li mp_assert.sas</span></div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="comment">  @li mx_testservice.sas</span></div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="comment"></span> </div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="comment">  &lt;h4&gt; Related Programs &lt;/h4&gt;</span></div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="comment">  @li refreshlibinfo.sas</span></div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="comment"></span> </div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="comment">**/</span></div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span> </div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span>%let _program=&amp;appLoc/services/<span class="keyword">public</span>/refreshlibinfo;</div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span> </div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>data work.lib2refresh;</div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>  libref=<span class="stringliteral">&quot;&amp;dclib&quot;</span>;</div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>run;</div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span> </div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>%mx_testservice(&amp;_program,</div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>  viyacontext=&amp;defaultcontext,</div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>  inputdatasets=work.lib2refresh,</div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>  outlib=web1,</div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>  mdebug=&amp;sasjs_mdebug</div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>)</div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span> </div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>%let msg=0;</div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>data work.status;</div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>  <span class="keyword">set</span> web1.status;</div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>  putlog (_all_)(=);</div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>  call symputx(<span class="stringliteral">&#39;msg&#39;</span>,msg);</div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>run;</div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span> </div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>%mp_assert(</div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>  iftrue=(&amp;msg=Success),</div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>  desc=Ensure the service ran without errors</div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>)</div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span> </div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span> </div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span> </div>
+</div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- HTML footer for doxygen 1.8.17-->
 <!-- start footer part -->
 <div id="nav-path" class="navpath">
   <!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_acd06b18086a0dd2ae699b1e0b775be8.html">node_modules</a></li><li class="navelem"><a class="el" href="dir_d0bc07ecc1e945ab241dcc179532a028.html">@sasjs</a></li><li class="navelem"><a class="el" href="dir_278752eb528f8860a53f3f25aa0f0d4b.html">core</a></li><li class="navelem"><a class="el" href="dir_5d4bbbf36122170d2d4afe0309aecea7.html">base</a></li><li class="navelem"><a class="el" href="mp__cleancsv_8sas.html">mp_cleancsv.sas</a></li>
+    <li class="navelem"><a class="el" href="dir_cfc38a21734c3edb6bc9dd88c6d4c406.html">sasjs</a></li><li class="navelem"><a class="el" href="dir_2dc29ef64dcb6013bd6e4ea806b1887e.html">services</a></li><li class="navelem"><a class="el" href="dir_14faff0c6f3b22df226aa27946e1ad45.html">public</a></li><li class="navelem"><a class="el" href="refreshlibinfo_8test_8sas.html">refreshlibinfo.test.sas</a></li>
     <li class="footer">
       Generated by
       <a href="https://www.doxygen.org/index.html">

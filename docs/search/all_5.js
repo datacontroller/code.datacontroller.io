@@ -22,12 +22,11 @@ var searchData=
   ['getgroups_2etest_2esas_19',['getgroups.test.sas',['../getgroups_8test_8sas.html',1,'']]],
   ['gethistory_2esas_20',['gethistory.sas',['../gethistory_8sas.html',1,'']]],
   ['gethistory_2etest_2esas_21',['gethistory.test.sas',['../gethistory_8test_8sas.html',1,'']]],
-  ['getlibinfo_2esas_22',['getlibinfo.sas',['../getlibinfo_8sas.html',1,'']]],
-  ['getlog_2esas_23',['getlog.sas',['../getlog_8sas.html',1,'']]],
-  ['getmetacols_2esas_24',['getmetacols.sas',['../getmetacols_8sas.html',1,'']]],
-  ['getmetatables_2esas_25',['getmetatables.sas',['../getmetatables_8sas.html',1,'']]],
-  ['getrawdata_2esas_26',['getrawdata.sas',['../getrawdata_8sas.html',1,'']]],
-  ['getrawdata_2etest_2esas_27',['getrawdata.test.sas',['../getrawdata_8test_8sas.html',1,'']]],
-  ['getstagetable_2esas_28',['getstagetable.sas',['../getstagetable_8sas.html',1,'']]],
-  ['getsubmits_2esas_29',['getsubmits.sas',['../getsubmits_8sas.html',1,'']]]
+  ['getlog_2esas_22',['getlog.sas',['../getlog_8sas.html',1,'']]],
+  ['getmetacols_2esas_23',['getmetacols.sas',['../getmetacols_8sas.html',1,'']]],
+  ['getmetatables_2esas_24',['getmetatables.sas',['../getmetatables_8sas.html',1,'']]],
+  ['getrawdata_2esas_25',['getrawdata.sas',['../getrawdata_8sas.html',1,'']]],
+  ['getrawdata_2etest_2esas_26',['getrawdata.test.sas',['../getrawdata_8test_8sas.html',1,'']]],
+  ['getstagetable_2esas_27',['getstagetable.sas',['../getstagetable_8sas.html',1,'']]],
+  ['getsubmits_2esas_28',['getsubmits.sas',['../getsubmits_8sas.html',1,'']]]
 ];

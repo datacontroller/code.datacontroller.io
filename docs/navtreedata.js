@@ -33,9 +33,9 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "bitemporal__closeouts_8sas.html",
-"mf__wordsinstr1andstr2_8sas_source.html",
-"mp__testservice_8sas_source.html",
-"server_2macros__server_2dc__getlibs_8sas.html"
+"mf__wordsinstr1butnotstr2_8sas.html",
+"mp__testservice_8sas.html",
+"server_2macros__server_2dc__createdataset_8sas_source.html"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

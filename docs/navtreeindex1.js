@@ -1,6 +1,5 @@
 var NAVTREEINDEX1 =
 {
-"mf__wordsinstr1andstr2_8sas_source.html":[1,0,0,0,0,45],
 "mf__wordsinstr1butnotstr2_8sas.html":[1,0,0,0,0,46],
 "mf__wordsinstr1butnotstr2_8sas_source.html":[1,0,0,0,0,46],
 "mf__writefile_8sas.html":[1,0,0,0,0,47],
@@ -103,10 +102,12 @@ var NAVTREEINDEX1 =
 "mm__updatestpsourcecode_8sas_source.html":[1,0,0,0,4,42],
 "mm__webout_8sas.html":[1,0,0,0,4,43],
 "mm__webout_8sas_source.html":[1,0,0,0,4,43],
-"mmx__deletemetafolder_8sas.html":[1,0,0,0,5,0],
-"mmx__deletemetafolder_8sas_source.html":[1,0,0,0,5,0],
-"mmx__spkexport_8sas.html":[1,0,0,0,5,1],
-"mmx__spkexport_8sas_source.html":[1,0,0,0,5,1],
+"mmx__createmetafolder_8sas.html":[1,0,0,0,5,0],
+"mmx__createmetafolder_8sas_source.html":[1,0,0,0,5,0],
+"mmx__deletemetafolder_8sas.html":[1,0,0,0,5,1],
+"mmx__deletemetafolder_8sas_source.html":[1,0,0,0,5,1],
+"mmx__spkexport_8sas.html":[1,0,0,0,5,2],
+"mmx__spkexport_8sas_source.html":[1,0,0,0,5,2],
 "mp__abort_8sas.html":[1,0,0,0,0,48],
 "mp__abort_8sas_source.html":[1,0,0,0,0,48],
 "mp__appendfile_8sas.html":[1,0,0,0,0,49],
@@ -248,6 +249,5 @@ var NAVTREEINDEX1 =
 "mp__streamfile_8sas.html":[1,0,0,0,0,117],
 "mp__streamfile_8sas_source.html":[1,0,0,0,0,117],
 "mp__testjob_8sas.html":[1,0,0,0,0,118],
-"mp__testjob_8sas_source.html":[1,0,0,0,0,118],
-"mp__testservice_8sas.html":[1,0,0,0,0,119]
+"mp__testjob_8sas_source.html":[1,0,0,0,0,118]
 };

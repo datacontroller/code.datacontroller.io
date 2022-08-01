@@ -133,7 +133,36 @@ $(document).ready(function(){initNavTree('viewtables_8sas.html',''); initResizab
 
 <p><a href="viewtables_8sas_source.html">Go to the source code of this file.</a></p>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p >Provide a library and get list of tables and catalogs</p>
+<div class="textblock"><p >Provide a library and get list of tables and catalogs. Also return the libinfo details.</p>
+<h4>Service Inputs </h4>
+<h5>SASControlTable </h5>
+<p >Just one input - MPLIB (the libref to get tables and info for) </p><table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">MPLIB:$char8.    </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">SOMELIB   </td></tr>
+</table>
+<h4>Service Outputs </h4>
+<h5>work.mptables </h5>
+<table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">MEMNAME:$char32.    </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">DS1    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">DS2    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">DS3   </td></tr>
+</table>
+<p >etc</p>
+<h5>work.libinfo </h5>
+<p >If attributes are empty, they don't need to be shown on screen.</p>
+<table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">engine $   </th><th class="markdownTableHeadNone">libname $   </th><th class="markdownTableHeadNone">paths $   </th><th class="markdownTableHeadNone">perms $   </th><th class="markdownTableHeadNone">owners $   </th><th class="markdownTableHeadNone">schemas $   </th><th class="markdownTableHeadNone">libid $   </th><th class="markdownTableHeadNone">libsize $   </th><th class="markdownTableHeadNone">table_cnt    </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">V9   </td><td class="markdownTableBodyNone">SOMELIB   </td><td class="markdownTableBodyNone">"some/path"   </td><td class="markdownTableBodyNone">rwxrwxr-x   </td><td class="markdownTableBodyNone">sassrv   </td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone">636MB   </td><td class="markdownTableBodyNone">33   </td></tr>
+</table>
 <h4>SAS Macros </h4>
 <ul>
 <li>dc_assignlib.sas </li>

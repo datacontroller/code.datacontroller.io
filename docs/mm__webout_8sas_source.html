@@ -281,50 +281,57 @@ $(document).ready(function(){initNavTree('mm__webout_8sas_source.html',''); init
 <div class="line"><a id="l00152" name="l00152"></a><span class="lineno">  152</span>  %end;</div>
 <div class="line"><a id="l00153" name="l00153"></a><span class="lineno">  153</span>  <span class="comment">/* close off json */</span></div>
 <div class="line"><a id="l00154" name="l00154"></a><span class="lineno">  154</span>  data _null_;file _sjsref mod encoding=&#39;utf-8&#39;;</div>
-<div class="line"><a id="l00155" name="l00155"></a><span class="lineno">  155</span>    _PROGRAM=quote(trim(resolve(symget(&#39;_PROGRAM&#39;))));</div>
-<div class="line"><a id="l00156" name="l00156"></a><span class="lineno">  156</span>    put &quot;,&quot;&quot;SYSUSERID&quot;&quot; : &quot;&quot;&amp;sysuserid&quot;&quot; &quot;;</div>
-<div class="line"><a id="l00157" name="l00157"></a><span class="lineno">  157</span>    put &quot;,&quot;&quot;MF_GETUSER&quot;&quot; : &quot;&quot;%mf_getuser()&quot;&quot; &quot;;</div>
-<div class="line"><a id="l00158" name="l00158"></a><span class="lineno">  158</span>    put &quot;,&quot;&quot;_DEBUG&quot;&quot; : &quot;&quot;&amp;_debug&quot;&quot; &quot;;</div>
-<div class="line"><a id="l00159" name="l00159"></a><span class="lineno">  159</span>    _METAUSER=quote(trim(symget(&#39;_METAUSER&#39;)));</div>
-<div class="line"><a id="l00160" name="l00160"></a><span class="lineno">  160</span>    put &quot;,&quot;&quot;_METAUSER&quot;&quot;: &quot; _METAUSER;</div>
-<div class="line"><a id="l00161" name="l00161"></a><span class="lineno">  161</span>    _METAPERSON=quote(trim(symget(&#39;_METAPERSON&#39;)));</div>
-<div class="line"><a id="l00162" name="l00162"></a><span class="lineno">  162</span>    put &#39;,&quot;_METAPERSON&quot;: &#39; _METAPERSON;</div>
-<div class="line"><a id="l00163" name="l00163"></a><span class="lineno">  163</span>    put &#39;,&quot;_PROGRAM&quot; : &#39; _PROGRAM ;</div>
-<div class="line"><a id="l00164" name="l00164"></a><span class="lineno">  164</span>    put &quot;,&quot;&quot;SYSCC&quot;&quot; : &quot;&quot;&amp;syscc&quot;&quot; &quot;;</div>
-<div class="line"><a id="l00165" name="l00165"></a><span class="lineno">  165</span>    put &quot;,&quot;&quot;SYSENCODING&quot;&quot; : &quot;&quot;&amp;sysencoding&quot;&quot; &quot;;</div>
-<div class="line"><a id="l00166" name="l00166"></a><span class="lineno">  166</span>    syserrortext=cats(&#39;&quot;&#39;,tranwrd(symget(&#39;syserrortext&#39;),&#39;&quot;&#39;,&#39;\&quot;&#39;),&#39;&quot;&#39;);</div>
-<div class="line"><a id="l00167" name="l00167"></a><span class="lineno">  167</span>    put &#39;,&quot;SYSERRORTEXT&quot; : &#39; syserrortext;</div>
-<div class="line"><a id="l00168" name="l00168"></a><span class="lineno">  168</span>    put &quot;,&quot;&quot;SYSHOSTNAME&quot;&quot; : &quot;&quot;&amp;syshostname&quot;&quot; &quot;;</div>
-<div class="line"><a id="l00169" name="l00169"></a><span class="lineno">  169</span>    put &quot;,&quot;&quot;SYSJOBID&quot;&quot; : &quot;&quot;&amp;sysjobid&quot;&quot; &quot;;</div>
-<div class="line"><a id="l00170" name="l00170"></a><span class="lineno">  170</span>    put &quot;,&quot;&quot;SYSSCPL&quot;&quot; : &quot;&quot;&amp;sysscpl&quot;&quot; &quot;;</div>
-<div class="line"><a id="l00171" name="l00171"></a><span class="lineno">  171</span>    put &quot;,&quot;&quot;SYSSITE&quot;&quot; : &quot;&quot;&amp;syssite&quot;&quot; &quot;;</div>
-<div class="line"><a id="l00172" name="l00172"></a><span class="lineno">  172</span>    sysvlong=quote(trim(symget(&#39;sysvlong&#39;)));</div>
-<div class="line"><a id="l00173" name="l00173"></a><span class="lineno">  173</span>    put &#39;,&quot;SYSVLONG&quot; : &#39; sysvlong;</div>
-<div class="line"><a id="l00174" name="l00174"></a><span class="lineno">  174</span>    syswarningtext=cats(&#39;&quot;&#39;,tranwrd(symget(&#39;syswarningtext&#39;),&#39;&quot;&#39;,&#39;\&quot;&#39;),&#39;&quot;&#39;);</div>
-<div class="line"><a id="l00175" name="l00175"></a><span class="lineno">  175</span>    put &#39;,&quot;SYSWARNINGTEXT&quot; : &#39; syswarningtext;</div>
-<div class="line"><a id="l00176" name="l00176"></a><span class="lineno">  176</span>    put &#39;,&quot;END_DTTM&quot; : &quot;&#39; &quot;%sysfunc(datetime(),E8601DT26.6)&quot; &#39;&quot; &#39;;</div>
-<div class="line"><a id="l00177" name="l00177"></a><span class="lineno">  177</span>    length memsize $32;</div>
-<div class="line"><a id="l00178" name="l00178"></a><span class="lineno">  178</span>    memsize=&quot;%sysfunc(INPUTN(%sysfunc(getoption(memsize)), best.),sizekmg.)&quot;;</div>
-<div class="line"><a id="l00179" name="l00179"></a><span class="lineno">  179</span>    memsize=quote(cats(memsize));</div>
-<div class="line"><a id="l00180" name="l00180"></a><span class="lineno">  180</span>    put &#39;,&quot;MEMSIZE&quot; : &#39; memsize;</div>
-<div class="line"><a id="l00181" name="l00181"></a><span class="lineno">  181</span>    put &quot;}&quot; @;</div>
-<div class="line"><a id="l00182" name="l00182"></a><span class="lineno">  182</span>  %if %str(&amp;_debug) ge 131 %then %do;</div>
-<div class="line"><a id="l00183" name="l00183"></a><span class="lineno">  183</span>    put &#39;&gt;&gt;weboutEND&lt;&lt;&#39;;</div>
-<div class="line"><a id="l00184" name="l00184"></a><span class="lineno">  184</span>  %end;</div>
-<div class="line"><a id="l00185" name="l00185"></a><span class="lineno">  185</span>  run;</div>
-<div class="line"><a id="l00186" name="l00186"></a><span class="lineno">  186</span>  <span class="comment">/* now write to _webout 1 char at a time */</span></div>
-<div class="line"><a id="l00187" name="l00187"></a><span class="lineno">  187</span>  data _null_;</div>
-<div class="line"><a id="l00188" name="l00188"></a><span class="lineno">  188</span>    infile _sjsref lrecl=1 recfm=n;</div>
-<div class="line"><a id="l00189" name="l00189"></a><span class="lineno">  189</span>    file &amp;fref mod lrecl=1 recfm=n;</div>
-<div class="line"><a id="l00190" name="l00190"></a><span class="lineno">  190</span>    input sourcechar $char1. @@;</div>
-<div class="line"><a id="l00191" name="l00191"></a><span class="lineno">  191</span>    format sourcechar hex2.;</div>
-<div class="line"><a id="l00192" name="l00192"></a><span class="lineno">  192</span>    put sourcechar char1. @@;</div>
-<div class="line"><a id="l00193" name="l00193"></a><span class="lineno">  193</span>  run;</div>
-<div class="line"><a id="l00194" name="l00194"></a><span class="lineno">  194</span>  filename _sjsref clear;</div>
-<div class="line"><a id="l00195" name="l00195"></a><span class="lineno">  195</span> </div>
-<div class="line"><a id="l00196" name="l00196"></a><span class="lineno">  196</span>%end;</div>
-<div class="line"><a id="l00197" name="l00197"></a><span class="lineno">  197</span> </div>
-<div class="line"><a id="l00198" name="l00198"></a><span class="lineno">  198</span>%mend mm_webout;</div>
+<div class="line"><a id="l00155" name="l00155"></a><span class="lineno">  155</span>    length SYSPROCESSNAME syserrortext syswarningtext autoexec $512;</div>
+<div class="line"><a id="l00156" name="l00156"></a><span class="lineno">  156</span>    put &quot;,&quot;&quot;_DEBUG&quot;&quot; : &quot;&quot;&amp;_debug&quot;&quot; &quot;;</div>
+<div class="line"><a id="l00157" name="l00157"></a><span class="lineno">  157</span>    _METAUSER=quote(trim(symget(&#39;_METAUSER&#39;)));</div>
+<div class="line"><a id="l00158" name="l00158"></a><span class="lineno">  158</span>    put &quot;,&quot;&quot;_METAUSER&quot;&quot;: &quot; _METAUSER;</div>
+<div class="line"><a id="l00159" name="l00159"></a><span class="lineno">  159</span>    _METAPERSON=quote(trim(symget(&#39;_METAPERSON&#39;)));</div>
+<div class="line"><a id="l00160" name="l00160"></a><span class="lineno">  160</span>    put &#39;,&quot;_METAPERSON&quot;: &#39; _METAPERSON;</div>
+<div class="line"><a id="l00161" name="l00161"></a><span class="lineno">  161</span>    _PROGRAM=quote(trim(resolve(symget(&#39;_PROGRAM&#39;))));</div>
+<div class="line"><a id="l00162" name="l00162"></a><span class="lineno">  162</span>    put &#39;,&quot;_PROGRAM&quot; : &#39; _PROGRAM ;</div>
+<div class="line"><a id="l00163" name="l00163"></a><span class="lineno">  163</span>    autoexec=quote(urlencode(trim(getoption(&#39;autoexec&#39;))));</div>
+<div class="line"><a id="l00164" name="l00164"></a><span class="lineno">  164</span>    put &#39;,&quot;AUTOEXEC&quot; : &#39; autoexec;</div>
+<div class="line"><a id="l00165" name="l00165"></a><span class="lineno">  165</span>    put &quot;,&quot;&quot;MF_GETUSER&quot;&quot; : &quot;&quot;%mf_getuser()&quot;&quot; &quot;;</div>
+<div class="line"><a id="l00166" name="l00166"></a><span class="lineno">  166</span>    put &quot;,&quot;&quot;SYSCC&quot;&quot; : &quot;&quot;&amp;syscc&quot;&quot; &quot;;</div>
+<div class="line"><a id="l00167" name="l00167"></a><span class="lineno">  167</span>    put &quot;,&quot;&quot;SYSENCODING&quot;&quot; : &quot;&quot;&amp;sysencoding&quot;&quot; &quot;;</div>
+<div class="line"><a id="l00168" name="l00168"></a><span class="lineno">  168</span>    syserrortext=cats(&#39;&quot;&#39;,tranwrd(symget(&#39;syserrortext&#39;),&#39;&quot;&#39;,&#39;\&quot;&#39;),&#39;&quot;&#39;);</div>
+<div class="line"><a id="l00169" name="l00169"></a><span class="lineno">  169</span>    put &#39;,&quot;SYSERRORTEXT&quot; : &#39; syserrortext;</div>
+<div class="line"><a id="l00170" name="l00170"></a><span class="lineno">  170</span>    put &quot;,&quot;&quot;SYSHOSTNAME&quot;&quot; : &quot;&quot;&amp;syshostname&quot;&quot; &quot;;</div>
+<div class="line"><a id="l00171" name="l00171"></a><span class="lineno">  171</span>    put &quot;,&quot;&quot;SYSPROCESSID&quot;&quot; : &quot;&quot;&amp;SYSPROCESSID&quot;&quot; &quot;;</div>
+<div class="line"><a id="l00172" name="l00172"></a><span class="lineno">  172</span>    put &quot;,&quot;&quot;SYSPROCESSMODE&quot;&quot; : &quot;&quot;&amp;SYSPROCESSMODE&quot;&quot; &quot;;</div>
+<div class="line"><a id="l00173" name="l00173"></a><span class="lineno">  173</span>    SYSPROCESSNAME=quote(urlencode(cats(SYSPROCESSNAME)));</div>
+<div class="line"><a id="l00174" name="l00174"></a><span class="lineno">  174</span>    put &quot;,&quot;&quot;SYSPROCESSNAME&quot;&quot; : &quot; SYSPROCESSNAME;</div>
+<div class="line"><a id="l00175" name="l00175"></a><span class="lineno">  175</span>    put &quot;,&quot;&quot;SYSJOBID&quot;&quot; : &quot;&quot;&amp;sysjobid&quot;&quot; &quot;;</div>
+<div class="line"><a id="l00176" name="l00176"></a><span class="lineno">  176</span>    put &quot;,&quot;&quot;SYSSCPL&quot;&quot; : &quot;&quot;&amp;sysscpl&quot;&quot; &quot;;</div>
+<div class="line"><a id="l00177" name="l00177"></a><span class="lineno">  177</span>    put &quot;,&quot;&quot;SYSSITE&quot;&quot; : &quot;&quot;&amp;syssite&quot;&quot; &quot;;</div>
+<div class="line"><a id="l00178" name="l00178"></a><span class="lineno">  178</span>    put &quot;,&quot;&quot;SYSUSERID&quot;&quot; : &quot;&quot;&amp;sysuserid&quot;&quot; &quot;;</div>
+<div class="line"><a id="l00179" name="l00179"></a><span class="lineno">  179</span>    sysvlong=quote(trim(symget(&#39;sysvlong&#39;)));</div>
+<div class="line"><a id="l00180" name="l00180"></a><span class="lineno">  180</span>    put &#39;,&quot;SYSVLONG&quot; : &#39; sysvlong;</div>
+<div class="line"><a id="l00181" name="l00181"></a><span class="lineno">  181</span>    syswarningtext=cats(&#39;&quot;&#39;,tranwrd(symget(&#39;syswarningtext&#39;),&#39;&quot;&#39;,&#39;\&quot;&#39;),&#39;&quot;&#39;);</div>
+<div class="line"><a id="l00182" name="l00182"></a><span class="lineno">  182</span>    put &#39;,&quot;SYSWARNINGTEXT&quot; : &#39; syswarningtext;</div>
+<div class="line"><a id="l00183" name="l00183"></a><span class="lineno">  183</span>    put &#39;,&quot;END_DTTM&quot; : &quot;&#39; &quot;%sysfunc(datetime(),E8601DT26.6)&quot; &#39;&quot; &#39;;</div>
+<div class="line"><a id="l00184" name="l00184"></a><span class="lineno">  184</span>    length memsize $32;</div>
+<div class="line"><a id="l00185" name="l00185"></a><span class="lineno">  185</span>    memsize=&quot;%sysfunc(INPUTN(%sysfunc(getoption(memsize)), best.),sizekmg.)&quot;;</div>
+<div class="line"><a id="l00186" name="l00186"></a><span class="lineno">  186</span>    memsize=quote(cats(memsize));</div>
+<div class="line"><a id="l00187" name="l00187"></a><span class="lineno">  187</span>    put &#39;,&quot;MEMSIZE&quot; : &#39; memsize;</div>
+<div class="line"><a id="l00188" name="l00188"></a><span class="lineno">  188</span>    put &quot;}&quot; @;</div>
+<div class="line"><a id="l00189" name="l00189"></a><span class="lineno">  189</span>  %if %str(&amp;_debug) ge 131 %then %do;</div>
+<div class="line"><a id="l00190" name="l00190"></a><span class="lineno">  190</span>    put &#39;&gt;&gt;weboutEND&lt;&lt;&#39;;</div>
+<div class="line"><a id="l00191" name="l00191"></a><span class="lineno">  191</span>  %end;</div>
+<div class="line"><a id="l00192" name="l00192"></a><span class="lineno">  192</span>  run;</div>
+<div class="line"><a id="l00193" name="l00193"></a><span class="lineno">  193</span>  <span class="comment">/* now write to _webout 1 char at a time */</span></div>
+<div class="line"><a id="l00194" name="l00194"></a><span class="lineno">  194</span>  data _null_;</div>
+<div class="line"><a id="l00195" name="l00195"></a><span class="lineno">  195</span>    infile _sjsref lrecl=1 recfm=n;</div>
+<div class="line"><a id="l00196" name="l00196"></a><span class="lineno">  196</span>    file &amp;fref mod lrecl=1 recfm=n;</div>
+<div class="line"><a id="l00197" name="l00197"></a><span class="lineno">  197</span>    input sourcechar $char1. @@;</div>
+<div class="line"><a id="l00198" name="l00198"></a><span class="lineno">  198</span>    format sourcechar hex2.;</div>
+<div class="line"><a id="l00199" name="l00199"></a><span class="lineno">  199</span>    put sourcechar char1. @@;</div>
+<div class="line"><a id="l00200" name="l00200"></a><span class="lineno">  200</span>  run;</div>
+<div class="line"><a id="l00201" name="l00201"></a><span class="lineno">  201</span>  filename _sjsref clear;</div>
+<div class="line"><a id="l00202" name="l00202"></a><span class="lineno">  202</span> </div>
+<div class="line"><a id="l00203" name="l00203"></a><span class="lineno">  203</span>%end;</div>
+<div class="line"><a id="l00204" name="l00204"></a><span class="lineno">  204</span> </div>
+<div class="line"><a id="l00205" name="l00205"></a><span class="lineno">  205</span>%mend mm_webout;</div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- HTML footer for doxygen 1.8.17-->

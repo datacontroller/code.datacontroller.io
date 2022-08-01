@@ -1,5 +1,6 @@
 var NAVTREEINDEX2 =
 {
+"mp__testservice_8sas.html":[1,0,0,0,0,119],
 "mp__testservice_8sas_source.html":[1,0,0,0,0,119],
 "mp__testwritespeedlibrary_8sas.html":[1,0,0,0,0,120],
 "mp__testwritespeedlibrary_8sas_source.html":[1,0,0,0,0,120],
@@ -216,16 +217,20 @@ var NAVTREEINDEX2 =
 "postdata_8test_82_8sas_source.html":[1,1,2,2,5],
 "refreshcatalog_8sas.html":[1,1,2,0,2],
 "refreshcatalog_8sas_source.html":[1,1,2,0,2],
+"refreshlibinfo_8sas.html":[1,1,2,5,13],
+"refreshlibinfo_8sas_source.html":[1,1,2,5,13],
+"refreshlibinfo_8test_8sas.html":[1,1,2,5,14],
+"refreshlibinfo_8test_8sas_source.html":[1,1,2,5,14],
 "refreshlibs_8sas.html":[1,1,2,0,3],
 "refreshlibs_8sas_source.html":[1,1,2,0,3],
 "refreshtablelineage_8sas.html":[1,1,3,0,0,0,3],
 "refreshtablelineage_8sas_source.html":[1,1,3,0,0,0,3],
 "registerkey_8sas.html":[1,1,2,0,4],
 "registerkey_8sas_source.html":[1,1,2,0,4],
-"registeruser_8sas.html":[1,1,2,5,14],
-"registeruser_8sas_source.html":[1,1,2,5,14],
-"registeruser_8test_8sas.html":[1,1,2,5,15],
-"registeruser_8test_8sas_source.html":[1,1,2,5,15],
+"registeruser_8sas.html":[1,1,2,5,15],
+"registeruser_8sas_source.html":[1,1,2,5,15],
+"registeruser_8test_8sas.html":[1,1,2,5,16],
+"registeruser_8test_8sas_source.html":[1,1,2,5,16],
 "rejection_8sas.html":[1,1,2,1,4],
 "rejection_8sas_source.html":[1,1,2,1,4],
 "removecolsfromwork_8sas.html":[1,1,1,27],
@@ -244,10 +249,5 @@ var NAVTREEINDEX2 =
 "sas__groups_8sas_source.html":[1,1,2,6,6],
 "server_2macros__server_2dc__assignlib_8sas.html":[1,1,3,1,0,0],
 "server_2macros__server_2dc__assignlib_8sas_source.html":[1,1,3,1,0,0],
-"server_2macros__server_2dc__createdataset_8sas.html":[1,1,3,1,0,1],
-"server_2macros__server_2dc__createdataset_8sas_source.html":[1,1,3,1,0,1],
-"server_2macros__server_2dc__getgroupmembers_8sas.html":[1,1,3,1,0,2],
-"server_2macros__server_2dc__getgroupmembers_8sas_source.html":[1,1,3,1,0,2],
-"server_2macros__server_2dc__getgroups_8sas.html":[1,1,3,1,0,3],
-"server_2macros__server_2dc__getgroups_8sas_source.html":[1,1,3,1,0,3]
+"server_2macros__server_2dc__createdataset_8sas.html":[1,1,3,1,0,1]
 };
