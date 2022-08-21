@@ -7,7 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=9" />
   <meta name="generator" content="Doxygen 1.9.3" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Data Controller: node_modules/@sasjs/core/server/ms_webout.sas File Reference</title>
+  <title>Data Controller: node_modules/@sasjs/core/meta/mm_getstpinfo.sas File Reference</title>
   <link href="tabs.css" rel="stylesheet" type="text/css" />
   <script type="text/javascript" src="jquery.js"></script>
   <script type="text/javascript" src="dynsections.js"></script>
@@ -105,7 +105,7 @@ var searchBox = new SearchBox("searchBox", "search",'Search','.html');
 </div>
 <script type="text/javascript">
 /* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
-$(document).ready(function(){initNavTree('ms__webout_8sas.html',''); initResizable(); });
+$(document).ready(function(){initNavTree('mm__getstpinfo_8sas.html',''); initResizable(); });
 /* @license-end */
 </script>
 <div id="doc-content">
@@ -124,53 +124,39 @@ $(document).ready(function(){initNavTree('ms__webout_8sas.html',''); initResizab
 </div>
 
 <div class="header">
-  <div class="headertitle"><div class="title">ms_webout.sas File Reference</div></div>
+  <div class="headertitle"><div class="title">mm_getstpinfo.sas File Reference</div></div>
 </div><!--header-->
 <div class="contents">
 
-<p>Send data to/from sasjs/server.  
+<p>Get the properties of a Stored Process.  
 <a href="#details">More...</a></p>
 
-<p><a href="ms__webout_8sas_source.html">Go to the source code of this file.</a></p>
+<p><a href="mm__getstpinfo_8sas_source.html">Go to the source code of this file.</a></p>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p >This macro should be added to the start of each web service, immediately** followed by a call to: </p><pre class="fragment">%ms_webout(FETCH)
-</pre><p> This will read all the input data and create same-named SAS datasets in the WORK library. You can then insert your code, and send data back using the following syntax: </p><pre class="fragment">data some datasets; * make some data ;
-  retain some columns;
-run;
-
-%ms_webout(OPEN)
-%ms_webout(ARR,some)  * Array format, fast, suitable for large tables ;
-%ms_webout(OBJ,datasets) * Object format, easier to work with ;
-%ms_webout(CLOSE)
-</pre><dl class="params"><dt>Parameters</dt><dd>
+<div class="textblock"><p >Extracts various properties and creates an output table in the structure below:</p>
+<table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">STP_URI:$200.   </th><th class="markdownTableHeadNone">SERVERCONTEXT:$200.   </th><th class="markdownTableHeadNone">STOREDPROCESSCONFIGURATION:$1000.   </th><th class="markdownTableHeadNone">SOURCECODE_FIRST32K:$32767.   </th><th class="markdownTableHeadNone">PATH:$76.    </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><code>A5DN9TDQ.BH0000C8</code>   </td><td class="markdownTableBodyNone"><code>SASApp</code>   </td><td class="markdownTableBodyNone"><code>&lt;?xml version="1.0" encoding="UTF-8"?&gt;&lt;StoredProcess&gt;&lt;ServerContext LogicalServerType="Sps" OtherAllowed="false"/&gt;&lt;ResultCapabilities Package="false" Streaming="true"/&gt;&lt;OutputParameters/&gt;&lt;/StoredProcess&gt;</code>   </td><td class="markdownTableBodyNone"><code>put first 32767 bytes of code;</code>   </td><td class="markdownTableBodyNone"><code>/path/to/my/stp</code>   </td></tr>
+</table>
+<dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">action</td><td>Either FETCH, OPEN, ARR, OBJ or CLOSE </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">ds</td><td>The dataset to send back to the frontend </td></tr>
-    <tr><td class="paramdir">[out]</td><td class="paramname">dslabel=</td><td>value to use instead of table name for sending to JSON </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">fmt=</td><td>(N) Setting Y converts all vars to their formatted values </td></tr>
-    <tr><td class="paramdir">[out]</td><td class="paramname">fref=</td><td>(_webout) The fileref to which to write the JSON </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">missing=</td><td>(NULL) Special numeric missing values can be sent as NULL (eg <code>null</code>) or as STRING values (eg <code>".a"</code> or <code>".b"</code>) </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">showmeta=</td><td>(N) Set to Y to output metadata alongside each table, such as the column formats and types. The metadata is contained inside an object with the same name as the table but prefixed with a dollar sign - ie, <code>,"$tablename":{"formats":{"col1":"$CHAR1"},"types":{"COL1":"C"}}</code> </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">workobs=</td><td>(0) When set to a positive integer, will create a new output object (WORK) which contains this number of observations from all tables in the WORK library. </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">maxobs=</td><td>(MAX) Provide an integer to limit the number of input rows that should be converted to output JSON</td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">pgm</td><td>The metadata path of the Stored Process </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">outds=</td><td>(work.mm_getstpinfo) The output table to create </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">mdebug=</td><td>(0) Set to 1 to enable DEBUG messages</td></tr>
   </table>
   </dd>
 </dl>
-<h4>SAS Macros </h4>
+<h4>Related Files </h4>
 <ul>
-<li><a class="el" href="mf__getuser_8sas.html" title="Returns a userid according to session context.">mf_getuser.sas</a> </li>
-<li><a class="el" href="mp__jsonout_8sas.html" title="Writes JSON in SASjs format to a fileref.">mp_jsonout.sas</a> </li>
-<li><a class="el" href="mfs__httpheader_8sas.html" title="Sets the http headers in the SASjs/server response.">mfs_httpheader.sas</a></li>
+<li><a class="el" href="mm__getstpcode_8sas.html" title="Writes the code of an STP to an external file.">mm_getstpcode.sas</a> </li>
+<li><a class="el" href="mm__getstps_8sas.html" title="Returns a dataset with all Stored Processes, or just those in a particular folder / with a particular...">mm_getstps.sas</a> </li>
+<li><a class="el" href="mm__createstp_8sas.html" title="Create a type 1 Stored Process (9.2 compatible)">mm_createstp.sas</a> </li>
+<li><a class="el" href="mm__deletestp_8sas.html" title="Deletes a Stored Process using path as reference.">mm_deletestp.sas</a> </li>
 </ul>
-<h4>Related Macros </h4>
-<ul>
-<li><a class="el" href="mv__webout_8sas.html" title="Send data to/from the SAS Viya Job Execution Service.">mv_webout.sas</a> </li>
-<li><a class="el" href="mm__webout_8sas.html" title="Send data to/from SAS Stored Processes.">mm_webout.sas</a></li>
-</ul>
-<dl class="section version"><dt>Version</dt><dd>9.3 </dd></dl>
-<dl class="section author"><dt>Author</dt><dd>Allan Bowe </dd></dl>
 
-<p class="definition">Definition in file <a class="el" href="ms__webout_8sas_source.html">ms_webout.sas</a>.</p>
+<p class="definition">Definition in file <a class="el" href="mm__getstpinfo_8sas_source.html">mm_getstpinfo.sas</a>.</p>
 </div></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- HTML footer for doxygen 1.8.17-->
@@ -178,7 +164,7 @@ run;
 <div id="nav-path" class="navpath">
   <!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_acd06b18086a0dd2ae699b1e0b775be8.html">node_modules</a></li><li class="navelem"><a class="el" href="dir_d0bc07ecc1e945ab241dcc179532a028.html">@sasjs</a></li><li class="navelem"><a class="el" href="dir_278752eb528f8860a53f3f25aa0f0d4b.html">core</a></li><li class="navelem"><a class="el" href="dir_30c56db831f7d6542d8c8acb7e563eea.html">server</a></li><li class="navelem"><a class="el" href="ms__webout_8sas.html">ms_webout.sas</a></li>
+    <li class="navelem"><a class="el" href="dir_acd06b18086a0dd2ae699b1e0b775be8.html">node_modules</a></li><li class="navelem"><a class="el" href="dir_d0bc07ecc1e945ab241dcc179532a028.html">@sasjs</a></li><li class="navelem"><a class="el" href="dir_278752eb528f8860a53f3f25aa0f0d4b.html">core</a></li><li class="navelem"><a class="el" href="dir_199b51b626b84bc0b297e2a564543329.html">meta</a></li><li class="navelem"><a class="el" href="mm__getstpinfo_8sas.html">mm_getstpinfo.sas</a></li>
     <li class="footer">
       Generated by
       <a href="https://www.doxygen.org/index.html">

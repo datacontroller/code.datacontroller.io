@@ -128,22 +128,24 @@ $(document).ready(function(){initNavTree('mpe__targetloader_8sas.html',''); init
 </div><!--header-->
 <div class="contents">
 
-<p>generic loader for loading a table configured in &amp;mpelib..mpe_tables  
+<p>Generic loader for tables configured in &amp;mpelib..mpe_tables.  
 <a href="#details">More...</a></p>
 
 <p><a href="mpe__targetloader_8sas_source.html">Go to the source code of this file.</a></p>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p >General wrapper for loading tables using ALL load types</p>
+<div class="textblock"><p >General wrapper for loading tables using ALL load types.</p>
+<p >Called by admin/postdata. The dclib should already be assigned.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">dclib=</td><td>The data controller control library</td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">dclib=</td><td>(NOTPROVIDED) The data controller control library </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">libds=</td><td>the library.dataset to load </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">now=</td><td>(sysfunc(datetime())) Static processed timestamp</td></tr>
   </table>
   </dd>
 </dl>
 <h4>SAS Macros </h4>
 <ul>
 <li><a class="el" href="bitemporal__dataloader_8sas.html" title="Routine supporting multiple load types.">bitemporal_dataloader.sas</a> </li>
-<li>dc_assignlib.sas </li>
 <li><a class="el" href="mf__existvar_8sas.html" title="Checks if a variable exists in a data set.">mf_existvar.sas</a> </li>
 <li><a class="el" href="mp__abort_8sas.html" title="abort gracefully according to context">mp_abort.sas</a> </li>
 <li><a class="el" href="mp__loadformat_8sas.html" title="Loads a format catalog from a staging dataset.">mp_loadformat.sas</a> </li>

@@ -30,6 +30,7 @@ var dir_199b51b626b84bc0b297e2a564543329 =
     [ "mm_getroles.sas", "mm__getroles_8sas.html", null ],
     [ "mm_getservercontexts.sas", "mm__getservercontexts_8sas.html", null ],
     [ "mm_getstpcode.sas", "mm__getstpcode_8sas.html", null ],
+    [ "mm_getstpinfo.sas", "mm__getstpinfo_8sas.html", null ],
     [ "mm_getstps.sas", "mm__getstps_8sas.html", null ],
     [ "mm_gettableid.sas", "mm__gettableid_8sas.html", null ],
     [ "mm_gettables.sas", "mm__gettables_8sas.html", null ],

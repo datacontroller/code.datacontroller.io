@@ -134,6 +134,7 @@ $(document).ready(function(){initNavTree('postdata_8sas.html',''); initResizable
 <p><a href="postdata_8sas_source.html">Go to the source code of this file.</a></p>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p >Before loading the target, a check is made against the time the target was last updated (backend) and the time the DIFF was generated (frontend). If the target was updated whilst the DIFF was on the screen, then the provided diff may have been incorrect and so a new DIFF should be generated and approved before load.</p>
+<p >Only 100 rows (of each DIFF type) are displayed on the DIFF screen.</p>
 <h4>Service Inputs </h4>
 <h5>SASCONTROLTABLE </h5>
 <table class="markdownTable">
@@ -145,6 +146,7 @@ $(document).ready(function(){initNavTree('postdata_8sas.html',''); initResizable
 <h4>SAS Macros </h4>
 <ul>
 <li><a class="el" href="bitemporal__dataloader_8sas.html" title="Routine supporting multiple load types.">bitemporal_dataloader.sas</a> </li>
+<li>dc_assignlib.sas </li>
 <li><a class="el" href="mf__existds_8sas.html" title="Checks whether a dataset OR a view exists.">mf_existds.sas</a> </li>
 <li><a class="el" href="mf__existvar_8sas.html" title="Checks if a variable exists in a data set.">mf_existvar.sas</a> </li>
 <li><a class="el" href="mf__getattrn_8sas.html" title="Returns a numeric attribute of a dataset.">mf_getattrn.sas</a> </li>
@@ -153,6 +155,7 @@ $(document).ready(function(){initNavTree('postdata_8sas.html',''); initResizable
 <li><a class="el" href="mf__getuniquelibref_8sas.html" title="Returns an unused libref.">mf_getuniquelibref.sas</a> </li>
 <li><a class="el" href="mf__getuser_8sas.html" title="Returns a userid according to session context.">mf_getuser.sas</a> </li>
 <li><a class="el" href="mf__getvarlist_8sas.html" title="Returns dataset variable list direct from header.">mf_getvarlist.sas</a> </li>
+<li><a class="el" href="mf__nobs_8sas.html" title="Returns number of logical (undeleted) observations.">mf_nobs.sas</a> </li>
 <li><a class="el" href="mf__verifymacvars_8sas.html" title="Checks if a set of macro variables exist AND contain values.">mf_verifymacvars.sas</a> </li>
 <li><a class="el" href="mp__abort_8sas.html" title="abort gracefully according to context">mp_abort.sas</a> </li>
 <li><a class="el" href="mp__cntlout_8sas.html" title="Creates a cntlout dataset in a consistent format.">mp_cntlout.sas</a> </li>
@@ -160,7 +163,7 @@ $(document).ready(function(){initNavTree('postdata_8sas.html',''); initResizable
 <li><a class="el" href="mpe__accesscheck_8sas.html" title="Checks the level of access a user has to the MP Editor.">mpe_accesscheck.sas</a> </li>
 <li><a class="el" href="mpe__alerts_8sas.html" title="send alerts">mpe_alerts.sas</a> </li>
 <li><a class="el" href="mpe__runhook_8sas.html" title="Runs a hook from MPE_TABLES.">mpe_runhook.sas</a> </li>
-<li><a class="el" href="mpe__targetloader_8sas.html" title="generic loader for loading a table configured in &amp;mpelib..mpe_tables">mpe_targetloader.sas</a> </li>
+<li><a class="el" href="mpe__targetloader_8sas.html" title="Generic loader for tables configured in &amp;mpelib..mpe_tables.">mpe_targetloader.sas</a> </li>
 <li><a class="el" href="removecolsfromwork_8sas.html" title="Temp fix to remove md5 content from tables.">removecolsfromwork.sas</a></li>
 </ul>
 <dl class="section version"><dt>Version</dt><dd>9.2 </dd></dl>

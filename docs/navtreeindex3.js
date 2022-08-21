@@ -1,5 +1,7 @@
 var NAVTREEINDEX3 =
 {
+"server_2macros__server_2dc__assignlib_8sas_source.html":[1,1,3,1,0,0],
+"server_2macros__server_2dc__createdataset_8sas.html":[1,1,3,1,0,1],
 "server_2macros__server_2dc__createdataset_8sas_source.html":[1,1,3,1,0,1],
 "server_2macros__server_2dc__getgroupmembers_8sas.html":[1,1,3,1,0,2],
 "server_2macros__server_2dc__getgroupmembers_8sas_source.html":[1,1,3,1,0,2],
