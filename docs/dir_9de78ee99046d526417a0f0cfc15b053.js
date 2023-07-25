@@ -3,7 +3,7 @@ var dir_9de78ee99046d526417a0f0cfc15b053 =
     [ "mpe_audit.ddl", "mpe__audit_8ddl.html", null ],
     [ "mpe_config.ddl", "mpe__config_8ddl.html", null ],
     [ "mpe_datacatalog_libs.ddl", "mpe__datacatalog__libs_8ddl.html", null ],
-    [ "mpe_datacatalog_tabs.ddl", "mpe__datacatalog__tabs_8ddl.html", null ],
+    [ "mpe_datacatalog_tabs.ddl", "mpe__datacatalog__tabs_8ddl_source.html", null ],
     [ "mpe_datacatalog_vars.ddl", "mpe__datacatalog__vars_8ddl.html", null ],
     [ "mpe_datadictionary.ddl", "mpe__datadictionary_8ddl.html", null ],
     [ "mpe_dataloads.ddl", "mpe__dataloads_8ddl.html", null ],
